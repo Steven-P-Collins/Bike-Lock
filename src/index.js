@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import '../CSS/index.css';
-import App from '../App';
+import Header from './App';
+import Login from './Javascript/Login';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Header />, document.getElementsByClassName('header')[0]);
+ReactDOM.render(<Login />, document.getElementsByClassName('login')[0]);
+// ReactDOM.render(<Form />, document.getElementsByClassName('form')[0]);
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
