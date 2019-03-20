@@ -64,8 +64,8 @@ body {
     font-family: Roboto;
     font-size: 15px;
     font-weight: 300;
-    margin-left: 12px;
-    margin-bottom: 24px;
+    /*margin-left: 12px;*/
+    margin-top: 24px;
     padding: 10px 11px 10px 13px;
     text-overflow: ellipsis;
     width: 400px;
