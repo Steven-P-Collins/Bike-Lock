@@ -1,19 +1,14 @@
 /* Always set the map height explicitly to define the size of the div
  * element that contains the map. */
-
 #map {
     height: 100%;
 }
-
 /* Optional: Makes the sample page fill the window. */
-
-html,
-body {
+html, body {
     height: 100%;
     margin: 0;
     padding: 0;
 }
-
 #description {
     font-family: Roboto;
     font-size: 15px;
@@ -64,9 +59,8 @@ body {
     font-family: Roboto;
     font-size: 15px;
     font-weight: 300;
-    /*margin-left: 12px;*/
-    margin-top: 24px;
-    padding: 10px 11px 10px 13px;
+    margin-left: 12px;
+    padding: 0 11px 0 13px;
     text-overflow: ellipsis;
     width: 400px;
 }
@@ -82,7 +76,6 @@ body {
     font-weight: 500;
     padding: 6px 12px;
 }
-
 #target {
     width: 345px;
 }
