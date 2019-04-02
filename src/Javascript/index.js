@@ -5,12 +5,57 @@
 // This example requires the Places library. Include the libraries=places
 // parameter when you first load the API. For example:
 
+var stylesArray = [
+    {
+        featureType: 'all',
+        stylers: [
+            {visibility: 'off'}
+        ]
+    },
+    {
+        featureType: 'road.local',
+        stylers: [
+            {visibility: 'on'}
+        ]
+    },
+    {
+        featureType: 'road.arterial',
+        stylers: [
+            {visibility: 'on'}
+        ]
+    },
+    {
+        featureType: 'landscape',
+        stylers: [
+            {visibility: 'on'}
+        ]
+    },
+    {
+        featureType: 'water',
+        stylers: [
+            {visibility: 'on'}
+        ]
+    },
+    {
+        featureType: 'poi.park',
+        stylers: [
+            {visibility: 'on'}
+        ]
+    }
+];
+
+
 function initAutocomplete() {
     var map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: -33.8688, lng: 151.2195},
+        center: {lat: 41.499321, lng: -81.694359},
         zoom: 18,
-        mapTypeId: 'roadmap'
+        mapTypeId: 'roadmap',
+        disableDefaultUI: 'true'
     });
+
+    var bikeLayer = new google.maps.BicyclingLayer();
+    bikeLayer.setMap(map);
+    map.setOptions({styles: stylesArray});
 
     // Create the search box and link it to the UI element.
     var input = document.getElementById('pac-input');
