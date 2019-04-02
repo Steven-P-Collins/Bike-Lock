@@ -55,14 +55,13 @@ html, body {
 }
 
 #pac-input {
-    background-color: #fff;
     font-family: Roboto;
-    font-size: 15px;
+    font-size: 2em;
     font-weight: 300;
-    margin-left: 12px;
+    height: 2em;
+    margin: 5% 25%;
     padding: 0 11px 0 13px;
-    text-overflow: ellipsis;
-    width: 400px;
+    width: 50%;
 }
 
 #pac-input:focus {
