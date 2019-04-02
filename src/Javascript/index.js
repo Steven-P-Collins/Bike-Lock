@@ -44,7 +44,6 @@ var stylesArray = [
     }
 ];
 
-
 function initAutocomplete() {
     var map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 41.499321, lng: -81.694359},

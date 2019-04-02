@@ -1,0 +1,10 @@
+#connect {
+    display: inline-block;
+}
+
+#disconnect,
+#battery,
+#lock {
+    display: none;
+}
+
