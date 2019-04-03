@@ -38,10 +38,21 @@ var stylesArray = [
     }
 ];
 
+var rackLocation = [
+    ['Tremont Athletic East', 41.508821, -81.602177],
+    ['Washkewicz School of Engineering', 41.503503, -81.673287],
+    ['Climb Cleveland', 41.482013, -81.687308],
+    ['Sherwin Williams HQ', 41.496804, -81.692058]
+];
+
+function test () {
+    alert('hey!');
+}
+
 function initAutocomplete() {
     var map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 41.499321, lng: -81.694359},
-        zoom: 18,
+        zoom: 17,
         mapTypeId: 'roadmap',
         disableDefaultUI: 'true'
     });
@@ -49,6 +60,26 @@ function initAutocomplete() {
     var bikeLayer = new google.maps.BicyclingLayer();
     bikeLayer.setMap(map);
     map.setOptions({styles: stylesArray});
+
+    let infowindow = new google.maps.InfoWindow();
+
+    rackLocation.forEach(rack => {
+        let marker = new google.maps.Marker({
+            position: {lat: rack[1], lng: rack[2]},
+            map: map,
+            title: rack[0]
+        });
+
+        marker.addListener('click', function() {
+            infowindow.setContent('<button onclick=test() }></button>');
+            infowindow.open(map, marker);
+        });
+    });
+
+    // var marker = new google.maps.Marker({
+    //     rackLocation
+    // });
+    // marker.setMap(map);
 
     // Create the search box and link it to the UI element.
     var input = document.getElementsByClassName('pac-input')[0];
@@ -60,7 +91,6 @@ function initAutocomplete() {
         searchBox.setBounds(map.getBounds());
     });
 
-    var markers = [];
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
     searchBox.addListener('places_changed', function() {

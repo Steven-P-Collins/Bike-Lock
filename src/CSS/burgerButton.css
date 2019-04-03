@@ -19,3 +19,8 @@
     transition: 0.5s;
     padding-top: 60px;
 }
+
+.sidePanel > a{
+    color: #fff;
+    display: flex;
+}
