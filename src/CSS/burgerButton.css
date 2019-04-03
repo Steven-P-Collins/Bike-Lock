@@ -1,0 +1,21 @@
+.burgerButton {
+    background-color: #000;
+    color: #d3d3d3;
+    font-size: 2em;
+    margin: 5% 85%;
+    position: absolute;
+    z-index: 100;
+}
+
+.sidePanel {
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
