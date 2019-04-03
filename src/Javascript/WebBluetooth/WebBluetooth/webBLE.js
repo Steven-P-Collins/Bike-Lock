@@ -6,6 +6,19 @@ var lockChar;
 var lockNotChar;
 var pass = new Uint16Array([0x1111]);
 
+let connectButton = document.getElementById("connect");
+let disconnectButton = document.getElementById("disconnect");
+let batteryButton = document.getElementById("battery");
+let lockButton = document.getElementById("lock");
+
+
+window.onload = function() {
+    connectButton.addEventListener("click", connect);
+    disconnectButton.addEventListener("click", disconnect);
+    batteryButton.addEventListener("click", getBatt);
+    lockButton.addEventListener("click", lock);
+};
+
 //For now the out put is just to the console. if you call the function it will do what you expect.
 //There is no point in changing the console outs until the DB is finished
 
@@ -13,6 +26,12 @@ var pass = new Uint16Array([0x1111]);
 
 //initialzation function. Should be called when the user wants to find a lock with BLE.
 function connect() {
+    connectButton.style.display = "none";
+    disconnectButton.style.display = "inline-block";
+    batteryButton.style.display = "inline-block";
+    lockButton.style.display = "inline-block";
+
+
     if (!navigator.bluetooth) {
         console.log('> WebBluetooth API is not available.\n' +
             '> Please make sure the Web Bluetooth flag is enabled.');
@@ -72,11 +91,17 @@ function connect() {
 
 //disconnection process. Can be used for choosing another lock
 function disconnect() {
+    connectButton.style.display = "inline-block";
+    disconnectButton.style.display = "none";
+    batteryButton.style.display = "none";
+    lockButton.style.display = "none";
+
+    alert("Disconnecting from lock");
+
     if (!bleDevice) {
         console.log('No Bluetooth Device connected...');
         return;
     }
-    console.log('Disconnecting from Bluetooth Device...');
     if (bleDevice.gatt.connected) {
         bleDevice.gatt.disconnect();
         console.log('Bluetooth Device connected: ' + bleDevice.gatt.connected);
@@ -87,7 +112,8 @@ function disconnect() {
 
 //Battery voltage reading. Should be called after connecting
 function getBatt() {
-    console.log('Reading Battery Level...');
+    alert("Reading battery level");
+
     let battLevelChar = battChar.readValue();
 
     battLevelChar.then(value => {
@@ -118,7 +144,8 @@ function onChanged(event) {
 
 //this function will move the stepper motor
 function lock() {
-    console.log('Locking');
+    alert('Locking...');
+
 	lockChar.writeValue(pass)
 	  .then(_ => {
 		console.log('Lock characteristic changed to: ' + pass);
