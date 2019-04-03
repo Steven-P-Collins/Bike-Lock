@@ -17,14 +17,6 @@ window.onload = function() {
     disconnectButton.addEventListener("click", disconnect);
     batteryButton.addEventListener("click", getBatt);
     lockButton.addEventListener("click", lock);
-
-    if (connectButton.style.display === "inline-block") {
-      disconnectButton.style.display = "none";
-      batteryButton.style.display = "none";
-      lockButton.style.display = "none";
-    } else if (disconnectButton.style.display === "inline-block") {
-      connectButton.style.display = "none";
-    }
 };
 
 //For now the out put is just to the console. if you call the function it will do what you expect.
