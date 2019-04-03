@@ -39,15 +39,11 @@ var stylesArray = [
 ];
 
 var rackLocation = [
-    ['Tremont Athletic East', 41.508821, -81.602177],
-    ['Washkewicz School of Engineering', 41.503503, -81.673287],
-    ['Climb Cleveland', 41.482013, -81.687308],
-    ['Sherwin Williams HQ', 41.496804, -81.692058]
+    ['Tremont Athletic East', 41.508821, -81.602177, 'A'],
+    ['Washkewicz School of Engineering', 41.503503, -81.673287, 'B'],
+    ['Climb Cleveland', 41.482013, -81.687308, 'C'],
+    ['Sherwin Williams HQ', 41.496804, -81.692058, 'D']
 ];
-
-function test () {
-    alert('hey!');
-}
 
 function initAutocomplete() {
     var map = new google.maps.Map(document.getElementById('map'), {
@@ -62,6 +58,9 @@ function initAutocomplete() {
     map.setOptions({styles: stylesArray});
 
     let infowindow = new google.maps.InfoWindow();
+    let content = document.getElementsByClassName('infoWindow')[0];
+    let infoWindowData = document.getElementsByClassName('infoWindow__Data')[0];
+    let locks = document.getElementsByClassName('locks')[0];
 
     rackLocation.forEach(rack => {
         let marker = new google.maps.Marker({
@@ -71,15 +70,22 @@ function initAutocomplete() {
         });
 
         marker.addListener('click', function() {
-            infowindow.setContent('<button onclick=test() }></button>');
+            locks.className = 'locks';
+            if (availableLocks[rack[3]][0] === 0) {
+                infoWindowData.innerHTML = rack[0] + ': No Free locks';
+                locks.style.display = 'none';
+            } else {
+                infoWindowData.innerHTML = rack[0] + ': Available locks: ' +
+                    availableLocks[rack[3]][0];
+                locks.style.display = 'block';
+                locks.classList.add(rack[3]);
+            }
+
+            infowindow.setContent(content);
             infowindow.open(map, marker);
         });
     });
 
-    // var marker = new google.maps.Marker({
-    //     rackLocation
-    // });
-    // marker.setMap(map);
 
     // Create the search box and link it to the UI element.
     var input = document.getElementsByClassName('pac-input')[0];

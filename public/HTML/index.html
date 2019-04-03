@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="../../src/CSS/burgerButton.css">
 
         <script src="../../src/Javascript/searchBar.js"></script>
+        <script src="../../src/Javascript/infoWindow.js"></script>
         <script src="../../src/Javascript/burgerButton.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXjF_A8Tp4XiVM7fh5HvVRqo8mBpxMIOQ&libraries=places&callback=initAutocomplete" async defer></script>
     </head>
@@ -23,7 +24,13 @@
         <a href="#">Settings</a>
     </div>
     <div id="map"></div>
+    <div class="infoWindow">
+        <p class="infoWindow__Data"></p>
+        <button class="locks">Choose Your Lock!</button>
+    </div>
     <input class="pac-input controls" type="text" placeholder="Search Box">
+
+
 
     </body>
 </html>
