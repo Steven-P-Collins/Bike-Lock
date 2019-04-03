@@ -6,26 +6,23 @@
 
         <title>Rent a Lock</title>
 
-        <link rel="stylesheet" href="../../src/CSS/map.css">
+        <link rel="stylesheet" href="../../src/CSS/searchBar.css">
+        <link rel="stylesheet" href="../../src/CSS/burgerButton.css">
 
-        <script src="../../src/Javascript/index.js"></script>
+        <script src="../../src/Javascript/searchBar.js"></script>
+        <script src="../../src/Javascript/burgerButton.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXjF_A8Tp4XiVM7fh5HvVRqo8mBpxMIOQ&libraries=places&callback=initAutocomplete" async defer></script>
     </head>
 
     <body>
-        <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-        <div id="map"></div>
+    <button class="burgerButton">☰</button>
+    <div class="sidePanel">
+        <a href="#">Account</a>
+        <a href="#">History</a>
+        <a href="#">Settings</a>
+    </div>
+    <div id="map"></div>
+    <input class="pac-input controls" type="text" placeholder="Search Box">
 
-        <!--<button class="openbtn" onclick="openNav()">☰</button>-->
-            <!--<div class="header"></div>-->
-            <!--<div class="login"></div>-->
-            <!--<div class="form"></div>-->
-
-        <!--<div id="mySidepanel" class="sidepanel">-->
-            <!--<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>-->
-            <!--<a href="#">Account</a>-->
-            <!--<a href="#">History</a>-->
-            <!--<a href="#">Settings</a>-->
-        <!--</div>-->
     </body>
 </html>

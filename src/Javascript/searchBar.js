@@ -13,13 +13,7 @@ var stylesArray = [
         ]
     },
     {
-        featureType: 'road.local',
-        stylers: [
-            {visibility: 'on'}
-        ]
-    },
-    {
-        featureType: 'road.arterial',
+        featureType: 'road',
         stylers: [
             {visibility: 'on'}
         ]
@@ -58,9 +52,9 @@ function initAutocomplete() {
     map.setOptions({styles: stylesArray});
 
     // Create the search box and link it to the UI element.
-    var input = document.getElementById('pac-input');
+    var input = document.getElementsByClassName('pac-input')[0];
     var searchBox = new google.maps.places.SearchBox(input);
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
 
     // Bias the SearchBox results towards current map's viewport.
     map.addListener('bounds_changed', function() {
