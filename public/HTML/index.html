@@ -8,29 +8,29 @@
 
         <link rel="stylesheet" href="../../src/CSS/searchBar.css">
         <link rel="stylesheet" href="../../src/CSS/burgerButton.css">
+        <!--<link rel="stylesheet" href="../../src/CSS/webBLE.css">-->
 
         <script src="../../src/Javascript/searchBar.js"></script>
-        <script src="../../src/Javascript/infoWindow.js"></script>
+        <!--<script src="../../src/Javascript/infoWindow.js"></script>-->
         <script src="../../src/Javascript/burgerButton.js"></script>
+        <script type="text/javascript" src="../../src/Javascript/WebBluetooth/WebBluetooth/webBLE.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXjF_A8Tp4XiVM7fh5HvVRqo8mBpxMIOQ&libraries=places&callback=initAutocomplete" async defer></script>
     </head>
 
     <body>
     <button class="burgerButton">☰</button>
     <div class="sidePanel">
-        <a href="webBLE.html">Lock Page</a>
         <a href="#">Account</a>
         <a href="#">History</a>
         <a href="#">Settings</a>
     </div>
     <div id="map"></div>
     <div class="infoWindow">
-        <p class="infoWindow__Data"></p>
-        <button class="locks">Choose Your Lock!</button>
+        <p class="infoWindow__Data"> </p>
+        <button class="connect">Connect</button>
+        <button class="disconnect">Disconnect</button>
     </div>
     <input class="pac-input controls" type="text" placeholder="Search Box">
-
-
 
     </body>
 </html>

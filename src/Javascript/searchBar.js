@@ -60,7 +60,8 @@ function initAutocomplete() {
     let infowindow = new google.maps.InfoWindow();
     let content = document.getElementsByClassName('infoWindow')[0];
     let infoWindowData = document.getElementsByClassName('infoWindow__Data')[0];
-    let locks = document.getElementsByClassName('locks')[0];
+    let connectButton = document.getElementsByClassName('connect')[0];
+    let disconnectButton = document.getElementsByClassName('disconnect')[0];
 
     rackLocation.forEach(rack => {
         let marker = new google.maps.Marker({
@@ -70,16 +71,20 @@ function initAutocomplete() {
         });
 
         marker.addListener('click', function() {
-            locks.className = 'locks';
             if (availableLocks[rack[3]][0] === 0) {
                 infoWindowData.innerHTML = rack[0] + ': No Free locks';
-                locks.style.display = 'none';
+                connectButton.style.display = 'none';
+                disconnectButton.style.display = 'none';
             } else {
                 infoWindowData.innerHTML = rack[0] + ': Available locks: ' +
-                    availableLocks[rack[3]][0];
-                locks.style.display = 'block';
-                locks.classList.add(rack[3]);
+                    availableLocks[rack[3]][0] + getBatt();
+                connectButton.style.display = 'block';
+                disconnectButton.style.display = 'block';
             }
+
+            /*
+            Need to add check if user already connected to bring up disconnect button
+             */
 
             infowindow.setContent(content);
             infowindow.open(map, marker);

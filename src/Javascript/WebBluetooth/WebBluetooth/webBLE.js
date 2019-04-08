@@ -6,18 +6,23 @@ var lockChar;
 var lockNotChar;
 var pass = new Uint16Array([0x1111]);
 
-let connectButton = document.getElementById("connect");
-let disconnectButton = document.getElementById("disconnect");
-let batteryButton = document.getElementById("battery");
-let lockButton = document.getElementById("lock");
+/*
+    Available Locks holds the key followed by
+    [Free locks, Locks in use, Total Locks]
+ */
 
-
-window.onload = function() {
-    connectButton.addEventListener("click", connect);
-    disconnectButton.addEventListener("click", disconnect);
-    batteryButton.addEventListener("click", getBatt);
-    lockButton.addEventListener("click", lock);
+var availableLocks = {
+    'A': [2, 3, 5],
+    'B': [0, 5, 5],
+    'C': [5, 0, 5],
+    'D': [0, 35, 35]
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementsByClassName("connect")[0].onclick = connect;
+    document.getElementsByClassName("disconnect")[0].onclick = disconnect;
+    // document.getElementById("lock").onclick = lock;
+});
 
 //For now the out put is just to the console. if you call the function it will do what you expect.
 //There is no point in changing the console outs until the DB is finished
@@ -26,11 +31,6 @@ window.onload = function() {
 
 //initialzation function. Should be called when the user wants to find a lock with BLE.
 function connect() {
-    connectButton.style.display = "none";
-    disconnectButton.style.display = "inline-block";
-    batteryButton.style.display = "inline-block";
-    lockButton.style.display = "inline-block";
-
 
     if (!navigator.bluetooth) {
         console.log('> WebBluetooth API is not available.\n' +
@@ -40,6 +40,9 @@ function connect() {
     console.log('Requesting Bluetooth Device...');
     navigator.bluetooth.requestDevice(
         {
+            // filters: [
+            //     {Name: ['bike_lock']}
+            // ],
             acceptAllDevices: true,
             optionalServices: [0xB10C]
         })
@@ -91,15 +94,9 @@ function connect() {
 
 //disconnection process. Can be used for choosing another lock
 function disconnect() {
-    connectButton.style.display = "inline-block";
-    disconnectButton.style.display = "none";
-    batteryButton.style.display = "none";
-    lockButton.style.display = "none";
-
-    alert("Disconnecting from lock");
 
     if (!bleDevice) {
-        console.log('No Bluetooth Device connected...');
+        alert('No Bluetooth Device connected...');
         return;
     }
     if (bleDevice.gatt.connected) {
@@ -112,24 +109,31 @@ function disconnect() {
 
 //Battery voltage reading. Should be called after connecting
 function getBatt() {
-    alert("Reading battery level");
+    /*
+    Placeholder to be deleted when we have a lock
+     */
+    let voltage = 12;
+    return '<br>Battery: ' + voltage + ' Volts';
+    /*
+    End of placeholder
+     */
 
-    let battLevelChar = battChar.readValue();
+    // let battLevelChar = battChar.readValue();
 
-    battLevelChar.then(value => {
-        var i;
-        var voltage;
-
-        voltage = String.fromCharCode(value.getUint8(0), value.getUint8(1), value.getUint8(2));
-
-        voltage = parseInt(voltage);
-
-        voltage = voltage * 2;
-        voltage = voltage * 3.3;
-        voltage = voltage / 1024;
-
-        console.log('Voltage is ' + voltage + ' Volts');
-    })
+    // battLevelChar.then(value => {
+    //     var i;
+    //     var voltage;
+    //
+    //     voltage = String.fromCharCode(value.getUint8(0), value.getUint8(1), value.getUint8(2));
+    //
+    //     voltage = parseInt(voltage);
+    //
+    //     voltage = voltage * 2;
+    //     voltage = voltage * 3.3;
+    //     voltage = voltage / 1024;
+    //
+    //     return '<br>Battery: ' + voltage + ' Volts';
+    // })
 }
 
 //Should not have to be called from anywhere but here
