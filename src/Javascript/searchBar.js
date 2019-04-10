@@ -46,12 +46,35 @@ var rackLocation = [
 ];
 
 function initAutocomplete() {
+    let defaultPos = { lat: 41.499321, lng: -81.694359 };
+
     var map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 41.499321, lng: -81.694359},
         zoom: 17,
         mapTypeId: 'roadmap',
         disableDefaultUI: 'true'
     });
+
+    let currentLocation = new google.maps.Marker({
+        map: map,
+        title: 'Your location'
+    });
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            let userPos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+
+            currentLocation.setPosition(userPos);
+            map.setCenter(userPos);
+        }, () => {
+            map.setCenter(defaultPos);
+        });
+    } else {
+        // Browser doesn't support Geolocation
+        alert('doesnt suopport geolocation');
+    }
 
     var bikeLayer = new google.maps.BicyclingLayer();
     bikeLayer.setMap(map);
@@ -74,15 +97,15 @@ function initAutocomplete() {
             if (availableLocks[rack[3]][0] === 0) {
                 infoWindowData.innerHTML = rack[0] + ': No Free locks';
                 connectButton.style.display = 'none';
-                disconnectButton.style.display = 'none';
+                // disconnectButton.style.display = 'none';
             } else {
                 infoWindowData.innerHTML = rack[0] + ': Available locks: ' +
                     availableLocks[rack[3]][0] + getBatt();
                 connectButton.style.display = 'block';
-                disconnectButton.style.display = 'block';
+                // disconnectButton.style.display = 'block';
             }
 
-            /*
+            /* TODO
             Need to add check if user already connected to bring up disconnect button
              */
 
@@ -112,9 +135,9 @@ function initAutocomplete() {
         }
 
         // Clear out the old markers.
-        markers.forEach(function(marker) {
-            marker.setMap(null);
-        });
+        // markers.forEach(function(marker) {
+        //     marker.setMap(null);
+        // });
         markers = [];
 
         // For each place, get the icon, name and location.
