@@ -73,7 +73,7 @@ function initAutocomplete() {
         });
     } else {
         // Browser doesn't support Geolocation
-        alert('doesnt suopport geolocation');
+        map.setCenter(defaultPos);
     }
 
     var bikeLayer = new google.maps.BicyclingLayer();
