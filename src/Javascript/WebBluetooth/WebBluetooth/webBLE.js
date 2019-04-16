@@ -19,9 +19,10 @@ var availableLocks = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+    // document.getElementsByClassName("battery")[0].onclick = getBatt;
     document.getElementsByClassName("connect")[0].onclick = connect;
     document.getElementsByClassName("disconnect")[0].onclick = disconnect;
-    // document.getElementById("lock").onclick = lock;
+    document.getElementsByClassName("lock")[0].onclick = lock;
 });
 
 //For now the out put is just to the console. if you call the function it will do what you expect.
@@ -40,11 +41,11 @@ function connect() {
     console.log('Requesting Bluetooth Device...');
     navigator.bluetooth.requestDevice(
         {
-            // filters: [
-            //     {Name: ['bike_lock']}
-            // ],
-            acceptAllDevices: true,
-            optionalServices: [0xB10C]
+            filters: [
+                {name: ['Bike Lock']}
+            ]
+            // acceptAllDevices: true,
+            // optionalServices: [0xB10C]
         })
         .then(device => {
             bleDevice = device;
@@ -90,6 +91,8 @@ function connect() {
         .catch(error => {
             console.log('YOU SHALL NOT PASS: ' + error);
         });
+
+    infowindow.close();
 }
 
 //disconnection process. Can be used for choosing another lock
@@ -97,44 +100,35 @@ function disconnect() {
 
     if (!bleDevice) {
         alert('No Bluetooth Device connected...');
-        return;
     }
-    if (bleDevice.gatt.connected) {
+    else if (bleDevice.gatt.connected) {
+        infowindow.close();
         bleDevice.gatt.disconnect();
         console.log('Bluetooth Device connected: ' + bleDevice.gatt.connected);
-    } else {
-        console.log('Bluetooth Device is already disconnected');
+
     }
 }
-
 //Battery voltage reading. Should be called after connecting
 function getBatt() {
-    /*
-    Placeholder to be deleted when we have a lock
-     */
-    let voltage = 12;
-    return '<br>Battery: ' + voltage + ' Volts';
-    /*
-    End of placeholder
-     */
 
-    // let battLevelChar = battChar.readValue();
+    let battLevelChar = battChar.readValue();
 
-    // battLevelChar.then(value => {
-    //     var i;
-    //     var voltage;
-    //
-    //     voltage = String.fromCharCode(value.getUint8(0), value.getUint8(1), value.getUint8(2));
-    //
-    //     voltage = parseInt(voltage);
-    //
-    //     voltage = voltage * 2;
-    //     voltage = voltage * 3.3;
-    //     voltage = voltage / 1024;
-    //
-    //     return '<br>Battery: ' + voltage + ' Volts';
-    // })
+    battLevelChar.then(value => {
+        var i;
+        var voltage;
+
+        voltage = String.fromCharCode(value.getUint8(0), value.getUint8(1), value.getUint8(2));
+
+        voltage = parseInt(voltage);
+
+        voltage = voltage * 2;
+        voltage = voltage * 3.3;
+        voltage = voltage / 1024;
+
+        console.log(voltage);
+    });
 }
+
 
 //Should not have to be called from anywhere but here
 function onChanged(event) {
@@ -144,19 +138,19 @@ function onChanged(event) {
 
     console.log("lock response: " + out);
     newP();
+    lockButton.innerHTML = lockButton.innerHTML === 'Lock' ? 'Unlock' : 'Lock';
 }
 
 //this function will move the stepper motor
 function lock() {
-    alert('Locking...');
 
 	lockChar.writeValue(pass)
-	  .then(_ => {
-		console.log('Lock characteristic changed to: ' + pass);
-	  })
-	  .catch(error => {
-		console.log('Error in lock: ' + error);
-	  });
+        .then(_ => {
+            console.log('Lock characteristic changed to: ' + pass);
+        })
+        .catch(error => {
+            console.log('Error in lock: ' + error);
+        });
 }
 
 //generates a new password should not be called anywhere but here
