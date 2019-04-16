@@ -45,8 +45,31 @@ var rackLocation = [
     ['Sherwin Williams HQ', 41.496804, -81.692058, 'D']
 ];
 
+var icons = {
+    user: {
+        icon: '../../src/Images/user.png'
+    },
+    numbers: [
+        '../../src/Images/number_0.png',
+        '../../src/Images/number_1.png',
+        '../../src/Images/number_2.png',
+         '../../src/Images/number_3.png',
+        '../../src/Images/number_4.png',
+        '../../src/Images/number_5.png'
+    ]
+};
+
+var infowindow;
+var lockButton;
+
 function initAutocomplete() {
     let defaultPos = { lat: 41.499321, lng: -81.694359 };
+    infowindow = new google.maps.InfoWindow();
+    let content = document.getElementsByClassName('infoWindow')[0];
+    let infoWindowData = document.getElementsByClassName('infoWindow__Data')[0];
+    let connectButton = document.getElementsByClassName('connect')[0];
+    let disconnectButton = document.getElementsByClassName('disconnect')[0];
+    lockButton = document.getElementsByClassName('lock')[0];
 
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 17,
@@ -56,6 +79,7 @@ function initAutocomplete() {
 
     let currentLocation = new google.maps.Marker({
         map: map,
+        icon: icons.user.icon,
         title: 'Your location'
     });
 
@@ -65,6 +89,15 @@ function initAutocomplete() {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
+
+            currentLocation.addListener('click', function() {
+                infoWindowData.innerHTML = 'Your Location';
+                connectButton.style.display = 'none';
+                disconnectButton.style.display = 'none';
+                lockButton.style.display = 'none';
+                infowindow.setContent(content);
+                infowindow.open(map, currentLocation);
+            });
 
             currentLocation.setPosition(userPos);
             map.setCenter(userPos);
@@ -80,34 +113,35 @@ function initAutocomplete() {
     bikeLayer.setMap(map);
     map.setOptions({styles: stylesArray});
 
-    let infowindow = new google.maps.InfoWindow();
-    let content = document.getElementsByClassName('infoWindow')[0];
-    let infoWindowData = document.getElementsByClassName('infoWindow__Data')[0];
-    let connectButton = document.getElementsByClassName('connect')[0];
-    let disconnectButton = document.getElementsByClassName('disconnect')[0];
-
     rackLocation.forEach(rack => {
         let marker = new google.maps.Marker({
             position: {lat: rack[1], lng: rack[2]},
             map: map,
+            icon: icons.numbers[availableLocks[rack[3]][0]],
             title: rack[0]
         });
 
         marker.addListener('click', function() {
             if (availableLocks[rack[3]][0] === 0) {
-                infoWindowData.innerHTML = rack[0] + ': No Free locks';
+                infoWindowData.innerHTML = rack[0] + '<br> No Free locks';
                 connectButton.style.display = 'none';
-                // disconnectButton.style.display = 'none';
-            } else {
-                infoWindowData.innerHTML = rack[0] + ': Available locks: ' +
-                    availableLocks[rack[3]][0] + getBatt();
-                connectButton.style.display = 'block';
-                // disconnectButton.style.display = 'block';
+                disconnectButton.style.display = 'none';
+                lockButton.style.display = 'none';
             }
-
-            /* TODO
-            Need to add check if user already connected to bring up disconnect button
-             */
+            else if (!bleDevice || !bleDevice.gatt.connected) {
+                lockButton.innerHTML = 'Lock';
+                connectButton.style.display = 'block';
+                disconnectButton.style.display = 'none';
+                lockButton.style.display = 'none';
+                infoWindowData.innerHTML = rack[0] + '<br> Available locks: ' +
+                    availableLocks[rack[3]][0];
+            }
+            else if (bleDevice.gatt.connected) {
+                infoWindowData.innerHTML = rack[0] + '<br>You are connected';
+                connectButton.style.display = 'none';
+                lockButton.style.display = 'block';
+                disconnectButton.style.display = 'block';
+            }
 
             infowindow.setContent(content);
             infowindow.open(map, marker);
