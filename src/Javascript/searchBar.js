@@ -47,15 +47,15 @@ var rackLocation = [
 
 var icons = {
     user: {
-        icon: '../../src/Images/user.png'
+        icon: 'src/Images/user.png'
     },
     numbers: [
-        '../../src/Images/number_0.png',
-        '../../src/Images/number_1.png',
-        '../../src/Images/number_2.png',
-         '../../src/Images/number_3.png',
-        '../../src/Images/number_4.png',
-        '../../src/Images/number_5.png'
+        'src/Images/number_0.png',
+        'src/Images/number_1.png',
+        'src/Images/number_2.png',
+        'src/Images/number_3.png',
+        'src/Images/number_4.png',
+        'src/Images/number_5.png'
     ]
 };
 

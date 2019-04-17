@@ -79,8 +79,3 @@ html, body, #map {
     /*width: 345px;*/
 /*}*/
 
-.connect,
-.disconnect,
-.lock {
-    display: none;
-}

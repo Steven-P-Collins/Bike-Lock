@@ -1,9 +1,5 @@
-/*#connect {*/
-    /*display: inline-block;*/
-/*}*/
-
-/*#disconnect,*/
-/*#battery,*/
-/*#lock {*/
-    /*display: none;*/
-/*}*/
+.connect,
+.disconnect,
+.lock {
+    display: none;
+}
