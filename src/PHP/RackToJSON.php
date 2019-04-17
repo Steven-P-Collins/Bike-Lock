@@ -3,7 +3,7 @@
 
 $servername = "127.0.0.1";
 $user = "root";
-$password = "Sokka8745";
+$password = "password";
 $dbname = "BikeLock";
 
 $connection = new mysqli($servername, $user, $password, $dbname);
