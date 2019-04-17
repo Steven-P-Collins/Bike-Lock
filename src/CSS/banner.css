@@ -1,0 +1,15 @@
+.banner {
+    background-color: #46b94f;
+    border-radius: 25px;
+    bottom: 3%;
+    display: none;
+    height: 15%;
+    left: 0;
+    margin: auto;
+    opacity: .75;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    width: 98%;
+    z-index: 1;
+}

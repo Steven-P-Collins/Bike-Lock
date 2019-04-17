@@ -13,13 +13,12 @@ var pass = new Uint16Array([0x1111]);
 
 var availableLocks = {
     'A': [2, 3, 5],
-    'B': [0, 5, 5],
+    'B': [1, 5, 5],
     'C': [5, 0, 5],
     'D': [0, 35, 35]
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    // document.getElementsByClassName("battery")[0].onclick = getBatt;
     document.getElementsByClassName("connect")[0].onclick = connect;
     document.getElementsByClassName("disconnect")[0].onclick = disconnect;
     document.getElementsByClassName("lock")[0].onclick = lock;
@@ -43,9 +42,9 @@ function connect() {
         {
             filters: [
                 {name: ['Bike Lock']}
-            ]
+            ],
             // acceptAllDevices: true,
-            // optionalServices: [0xB10C]
+            optionalServices: [0xB10C]
         })
         .then(device => {
             bleDevice = device;
@@ -83,6 +82,7 @@ function connect() {
         .then(characteristic => {
             lockNotChar = characteristic;
             console.log('found Lock characteristic');
+            buttonDisplay(2);
             return lockNotChar.startNotifications().then(_ => {
                 console.log('Notifications started');
                 lockNotChar.addEventListener('characteristicvaluechanged', onChanged);
@@ -92,7 +92,6 @@ function connect() {
             console.log('YOU SHALL NOT PASS: ' + error);
         });
 
-    infowindow.close();
 }
 
 //disconnection process. Can be used for choosing another lock
@@ -102,10 +101,9 @@ function disconnect() {
         alert('No Bluetooth Device connected...');
     }
     else if (bleDevice.gatt.connected) {
-        infowindow.close();
         bleDevice.gatt.disconnect();
         console.log('Bluetooth Device connected: ' + bleDevice.gatt.connected);
-
+        buttonDisplay(1);
     }
 }
 //Battery voltage reading. Should be called after connecting
@@ -132,18 +130,20 @@ function getBatt() {
 
 //Should not have to be called from anywhere but here
 function onChanged(event) {
-    let value = event.target.value;    
+    let value = event.target.value;
+    let lockButtonText = document.getElementsByClassName('lock')[0];
 
     let out = value.getUint8(0);
 
     console.log("lock response: " + out);
     newP();
-    lockButton.innerHTML = lockButton.innerHTML === 'Lock' ? 'Unlock' : 'Lock';
+    lockButtonText.innerHTML = lockButtonText.innerHTML === 'Lock' ? 'Unlock' : 'Lock';
 }
 
 //this function will move the stepper motor
 function lock() {
-
+    //Hides buttons so users cannot disconnect while state changing
+    buttonDisplay(0);
 	lockChar.writeValue(pass)
         .then(_ => {
             console.log('Lock characteristic changed to: ' + pass);
@@ -158,4 +158,6 @@ function newP() {
     console.log('Creating new password');
     pass = new Uint16Array([((pass * pass) & 0x00FFFF00) >> 8]);
 	console.log(pass);
+	//Allows buttons to reappear after state change completed
+    buttonDisplay(2);
 }

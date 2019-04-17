@@ -8,29 +8,46 @@
 
         <link rel="stylesheet" href="src/CSS/searchBar.css">
         <link rel="stylesheet" href="src/CSS/burgerButton.css">
+        <link rel="stylesheet" href="src/CSS/banner.css">
         <link rel="stylesheet" href="src/CSS/webBLE.css">
+
+        <link rel="shortcut icon" href="src/Images/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="src/Images/favicon.ico" type="image/x-icon">
 
         <script src="src/Javascript/searchBar.js"></script>
         <script src="src/Javascript/burgerButton.js"></script>
-        <script type="text/javascript" src="src/Javascript/WebBluetooth/WebBluetooth/webBLE.js"></script>
+        <script src="src/Javascript/banner.js"></script>
+        <script src="src/Javascript/WebBluetooth/WebBluetooth/webBLE.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXjF_A8Tp4XiVM7fh5HvVRqo8mBpxMIOQ&libraries=places&callback=initAutocomplete" async defer></script>
     </head>
 
     <body>
-    <button class="burgerButton">☰</button>
-    <div class="sidePanel">
-        <a href="#">Account</a>
-        <a href="#">History</a>
-        <a href="#">Settings</a>
-    </div>
-    <div id="map"></div>
-    <div class="infoWindow">
-        <p class="infoWindow__Data"> </p>
-        <button class="lock">Lock</button>
-        <button class="connect">Connect</button>
-        <button class="disconnect">Disconnect</button>
-    </div>
-    <input class="pac-input controls" type="text" placeholder="Search Box">
+        <button class="burgerButton">☰</button>
+
+        <div class="sidePanel">
+            <a href="#">Account</a>
+            <a href="#">History</a>
+            <a href="#">Settings</a>
+        </div>
+
+        <div class="banner">
+            <p class="banner_location"> </p>
+            <p class="banner_info"> </p>
+            <button class="lock">Lock</button>
+            <button class="connect">Connect</button>
+            <button class="disconnect">Disconnect</button>
+        </div>
+
+        <div id="map"></div>
+
+        <!--<div class="infoWindow">-->
+            <!--<p class="infoWindow__Data"> </p>-->
+            <!--<button class="lock">Lock</button>-->
+            <!--<button class="connect">Connect</button>-->
+            <!--<button class="disconnect">Disconnect</button>-->
+        <!--</div>-->
+
+        <input class="pac-input controls" type="text" placeholder="Search Box">
 
     </body>
 </html>

@@ -59,28 +59,13 @@ var icons = {
     ]
 };
 
-var infowindow;
-var lockButton;
-
 function initAutocomplete() {
     let defaultPos = { lat: 41.499321, lng: -81.694359 };
-    infowindow = new google.maps.InfoWindow();
-    let content = document.getElementsByClassName('infoWindow')[0];
-    let infoWindowData = document.getElementsByClassName('infoWindow__Data')[0];
-    let connectButton = document.getElementsByClassName('connect')[0];
-    let disconnectButton = document.getElementsByClassName('disconnect')[0];
-    lockButton = document.getElementsByClassName('lock')[0];
 
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 17,
         mapTypeId: 'roadmap',
         disableDefaultUI: 'true'
-    });
-
-    let currentLocation = new google.maps.Marker({
-        map: map,
-        icon: icons.user.icon,
-        title: 'Your location'
     });
 
     if (navigator.geolocation) {
@@ -89,27 +74,28 @@ function initAutocomplete() {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
-
-            currentLocation.addListener('click', function() {
-                infoWindowData.innerHTML = 'Your Location';
-                connectButton.style.display = 'none';
-                disconnectButton.style.display = 'none';
-                lockButton.style.display = 'none';
-                infowindow.setContent(content);
-                infowindow.open(map, currentLocation);
+            let currentLocation = new google.maps.Marker({
+                map: map,
+                icon: icons.user.icon,
+                title: 'Your location'
             });
 
+            //Puts user marker on map
+            currentLocation.addListener('click', () => {
+                banner(currentLocation);
+            });
             currentLocation.setPosition(userPos);
             map.setCenter(userPos);
         }, () => {
             map.setCenter(defaultPos);
         });
-    } else {
+    }
+    else {
         // Browser doesn't support Geolocation
         map.setCenter(defaultPos);
     }
 
-    var bikeLayer = new google.maps.BicyclingLayer();
+    const bikeLayer = new google.maps.BicyclingLayer();
     bikeLayer.setMap(map);
     map.setOptions({styles: stylesArray});
 
@@ -121,30 +107,9 @@ function initAutocomplete() {
             title: rack[0]
         });
 
-        marker.addListener('click', function() {
-            if (availableLocks[rack[3]][0] === 0) {
-                infoWindowData.innerHTML = rack[0] + '<br> No Free locks';
-                connectButton.style.display = 'none';
-                disconnectButton.style.display = 'none';
-                lockButton.style.display = 'none';
-            }
-            else if (!bleDevice || !bleDevice.gatt.connected) {
-                lockButton.innerHTML = 'Lock';
-                connectButton.style.display = 'block';
-                disconnectButton.style.display = 'none';
-                lockButton.style.display = 'none';
-                infoWindowData.innerHTML = rack[0] + '<br> Available locks: ' +
-                    availableLocks[rack[3]][0];
-            }
-            else if (bleDevice.gatt.connected) {
-                infoWindowData.innerHTML = rack[0] + '<br>You are connected';
-                connectButton.style.display = 'none';
-                lockButton.style.display = 'block';
-                disconnectButton.style.display = 'block';
-            }
-
-            infowindow.setContent(content);
-            infowindow.open(map, marker);
+        //Passes the specific rack to display necessary data, location, num locks
+        marker.addListener('click', () => {
+            banner(rack);
         });
     });
 
@@ -168,10 +133,6 @@ function initAutocomplete() {
             return;
         }
 
-        // Clear out the old markers.
-        // markers.forEach(function(marker) {
-        //     marker.setMap(null);
-        // });
         markers = [];
 
         // For each place, get the icon, name and location.
