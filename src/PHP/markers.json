@@ -1,1 +1,1 @@
-[{"rackID":"1","lat":"41.497608","lng":"-81.692505","name":"Sherwin-Williams HQ"},{"rackID":"2","lat":"41.503582","lng":"-81.672661","name":"Washkewicz College of Engineering"},{"rackID":"3","lat":"41.508904","lng":"-81.601761","name":"Tremont Athletic Club (East)"},{"rackID":"4","lat":"41.482071","lng":"-81.687347","name":"Climb Cleveland"}]
+[["Sherwin-Williams HQ","41.497608","-81.692505","1"],["Washkewicz College of Engineering","41.503582","-81.672661","2"],["Tremont Athletic Club (East)","41.508904","-81.601761","3"],["Climb Cleveland","41.482071","-81.687347","4"]]
