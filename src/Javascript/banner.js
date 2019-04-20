@@ -1,32 +1,45 @@
 //Turns banner on and off for displaying buttons to lock and such
+
 banner = function (location) {
-    let banner = document.getElementsByClassName('banner')[0].style;
-    //Array storing dom of data that needs populated
-    let bannerData = [document.getElementsByClassName('banner_location')[0],
-        document.getElementsByClassName('banner_info')[0]];
+    let bannerData = [document.getElementsByClassName('banner')[0].style,
+        document.getElementsByClassName('banner_location')[0],
+        document.getElementsByClassName('banner_info')[0].style];
 
     location.title !== 'Your location' ? lockMarker(bannerData, location) :
         userMarker(bannerData, location.title);
 
-    banner.display = banner.display === 'block' ? 'none' : 'block';
 };
 
 userMarker = function (data, title) {
-    data[0].innerHTML = title;
-    data[1].innerHTML = 'Here you will see examples of the type of actions ' +
-        'you can perform when you click on an available rack';
+    if (data[0].display !== 'block') {
+        data[0].display = 'block';
+    }
+    else if (title === data[1].innerHTML) {
+        data[0].display = 'none';
+    }
+    data[1].innerHTML = title;
+    data[2].display = 'block';
+
     buttonDisplay(0);
 };
 
 lockMarker = function  (data, title) {
-    data[0].innerHTML = title[0];
+    if (data[0].display !== 'block') {
+        data[0].display = 'block';
+    }
+    else if (title[0] === data[1].innerHTML) {
+        data[0].display = 'none';
+    }
+
+    data[0].backgroundColor = '#46b94f';
+    data[1].innerHTML = title[0];
+    data[2].display = 'none';
 
     if (availableLocks[title[3]][0] === 0) {
-        data[1].innerHTML = 'No locks available';
+        data[0].backgroundColor = '#db1011';
         buttonDisplay(0);
     }
     else if (!bleDevice || !bleDevice.gatt.connected) {
-        data[1].innerHTML = 'Available locks: ' + availableLocks[title[3]][0];
         buttonDisplay(1);
 
     }
@@ -58,6 +71,11 @@ buttonDisplay = function (choice) {
         connectButton.display = 'none';
         disconnectButton.display = 'block';
     }
+};
+
+closeBanner = function () {
+    alert('in');
+    document.getElementsByClassName('banner')[0].style.display = 'none';
 };
 
 // availableLocks[title[3]][0]

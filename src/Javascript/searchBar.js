@@ -45,21 +45,23 @@ var rackLocation = [
     ['Sherwin Williams HQ', 41.496804, -81.692058, 'D']
 ];
 
-var icons = {
-    user: {
-        icon: 'src/Images/user.png'
-    },
-    numbers: [
-        'src/Images/number_0.png',
-        'src/Images/number_1.png',
-        'src/Images/number_2.png',
-        'src/Images/number_3.png',
-        'src/Images/number_4.png',
-        'src/Images/number_5.png'
-    ]
-};
+
 
 function initAutocomplete() {
+    //Needs to be inside this function
+    var markerSize = new google.maps.Size(50, 50);
+    var markerURL = 'src/Images/number_';
+    var icons = {
+        user: {
+            url: 'src/Images/user.png',
+            scaledSize: markerSize
+        },
+        numbers: {
+            url: markerURL,
+            scaledSize: markerSize
+        }
+    };
+
     let defaultPos = { lat: 41.499321, lng: -81.694359 };
 
     var map = new google.maps.Map(document.getElementById('map'), {
@@ -76,7 +78,7 @@ function initAutocomplete() {
             };
             let currentLocation = new google.maps.Marker({
                 map: map,
-                icon: icons.user.icon,
+                icon: icons.user,
                 title: 'Your location'
             });
 
@@ -99,18 +101,23 @@ function initAutocomplete() {
     bikeLayer.setMap(map);
     map.setOptions({styles: stylesArray});
 
+    var previousRack;
+
     rackLocation.forEach(rack => {
+        icons.numbers.url += availableLocks[rack[3]][0] + '.png';
         let marker = new google.maps.Marker({
             position: {lat: rack[1], lng: rack[2]},
             map: map,
-            icon: icons.numbers[availableLocks[rack[3]][0]],
+            icon: icons.numbers,
             title: rack[0]
         });
 
         //Passes the specific rack to display necessary data, location, num locks
         marker.addListener('click', () => {
             banner(rack);
+            previousRack = rack.title;
         });
+        icons.numbers.url = markerURL;
     });
 
 
