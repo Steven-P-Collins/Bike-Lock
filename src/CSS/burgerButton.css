@@ -20,6 +20,11 @@
 }
 
 .sidePanel > a {
+    font-family: Arial;
+    font-size: 22px;
+    text-decoration: none;
+    margin-left: 20px;
+    padding: 5px;
     color: #fff;
     display: flex;
 }
