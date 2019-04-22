@@ -1,37 +1,30 @@
 //Turns banner on and off for displaying buttons to lock and such
+
 banner = function (location) {
-    let banner = document.getElementsByClassName('banner')[0].style;
-    //Array storing dom of data that needs populated
-    let bannerData = [document.getElementsByClassName('banner_location')[0],
-        document.getElementsByClassName('banner_info')[0]];
+    let banner = document.getElementsByClassName('banner')[0];
 
-    location.title !== 'Your location' ? lockMarker(bannerData, location) :
-        userMarker(bannerData, location.title);
+    closeBanner(banner, location[0]);
 
-    banner.display = banner.display === 'block' ? 'none' : 'block';
+    location[0] !== 'Your location' ? lockMarker(banner, location) :
+        userMarker(banner, location[0]);
+
 };
 
-userMarker = function (data, title) {
-    data[0].innerHTML = title;
-    data[1].innerHTML = 'Here you will see examples of the type of actions ' +
-        'you can perform when you click on an available rack';
-    buttonDisplay(0);
+userMarker = function (banner, title) {
+    banner.id = title;
+    buttonDisplay(3);
 };
 
-lockMarker = function  (data, title) {
-    data[0].innerHTML = title[0];
+lockMarker = function  (banner, title) {
+    banner.id = title[0];
 
     if (availableLocks[title[3]][0] === 0) {
-        data[1].innerHTML = 'No locks available';
         buttonDisplay(0);
     }
     else if (!bleDevice || !bleDevice.gatt.connected) {
-        data[1].innerHTML = 'Available locks: ' + availableLocks[title[3]][0];
         buttonDisplay(1);
-
     }
     else if (bleDevice.gatt.connected) {
-        data[1].innerHTML = 'You are connected';
         buttonDisplay(2);
     }
 };
@@ -41,23 +34,58 @@ buttonDisplay = function (choice) {
     let connectButton = document.getElementsByClassName('connect')[0].style;
     let disconnectButton = document.getElementsByClassName('disconnect')[0].style;
     let lockButton = document.getElementsByClassName('lock')[0];
+    let tutorial = document.getElementsByClassName('tutorial')[0].style;
+    let noLocks = document.getElementsByClassName('no_locks')[0].style;
 
     if (choice === 0) {
         lockButton.style.display = 'none';
         connectButton.display = 'none';
         disconnectButton.display = 'none';
+        tutorial.display = 'none';
+        noLocks.display = 'block';
     }
     else if (choice === 1) {
         lockButton.innerHTML = 'Lock';
         lockButton.style.display = 'none';
         connectButton.display = 'block';
         disconnectButton.display = 'none';
+        tutorial.display = 'none';
+        noLocks.display = 'none';
     }
     else if (choice === 2) {
-        lockButton.style.display = 'block';
+        lockButton.style.display = 'inline-block';
         connectButton.display = 'none';
-        disconnectButton.display = 'block';
+        disconnectButton.display = 'inline-block';
+        tutorial.display = 'none';
+        noLocks.display = 'none';
+    }
+    else {
+        lockButton.style.display = 'none';
+        connectButton.display = 'none';
+        disconnectButton.display = 'none';
+        tutorial.display = 'block';
+        noLocks.display = 'none';
     }
 };
 
-// availableLocks[title[3]][0]
+closeBanner = function (banner, title) {
+    if (banner.style.display !== 'block') {
+        banner.style.display = 'block';
+    }
+    else if (title === banner.id) {
+        banner.style.display = 'none';
+    }
+};
+
+toggleBounce = function (prevMarker, marker) {
+    if (prevMarker !== marker) {
+        prevMarker.setAnimation(null);
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+    }
+    else if (prevMarker === marker && !prevMarker.getAnimation()) {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+    }
+    else {
+        marker.setAnimation(null);
+    }
+};

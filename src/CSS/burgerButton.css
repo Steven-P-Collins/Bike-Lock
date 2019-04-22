@@ -3,8 +3,9 @@
     color: #d3d3d3;
     font-size: 2em;
     margin: 5% 85%;
+    outline: none;
     position: absolute;
-    z-index: 100;
+    z-index: 1;
 }
 
 .sidePanel {

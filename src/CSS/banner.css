@@ -1,12 +1,10 @@
 .banner {
-    background-color: #46b94f;
-    border-radius: 25px;
     bottom: 3%;
     display: none;
+    font-family: sans-serif;
     height: 15%;
     left: 0;
     margin: auto;
-    opacity: .75;
     position: absolute;
     right: 0;
     text-align: center;
