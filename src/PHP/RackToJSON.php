@@ -27,7 +27,7 @@ while ($row = @mysqli_fetch_assoc($result)) {
     $data[$x][] = $row['lng'];
     $data[$x][] = $row['rackID'];
 
-    $x += 1;
+    $x++;
 }
 
 $data = json_encode($data);
