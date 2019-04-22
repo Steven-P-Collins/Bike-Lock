@@ -1,5 +1,4 @@
 <?php
-//require("phpsqlajax_dbinfo.php");
 
 $servername = "127.0.0.1";
 $user = "root";
