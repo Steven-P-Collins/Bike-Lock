@@ -5,7 +5,7 @@
 // This example requires the Places library. Include the libraries=places
 // parameter when you first load the API. For example:
 
-var stylesArray = [
+const stylesArray = [
     {
         featureType: 'all',
         stylers: [
@@ -45,30 +45,49 @@ var rackLocation = [
     ['Sherwin Williams HQ', 41.496804, -81.692058, 'D']
 ];
 
-
-
 function initAutocomplete() {
     //Needs to be inside this function
-    var markerSize = new google.maps.Size(50, 50);
-    var markerURL = 'src/Images/number_';
+    const markerSize = new google.maps.Size(50, 50);
+    const markerURL = 'src/Images/number_';
     var icons = {
         user: {
-            url: 'src/Images/user.png',
+            url: 'src/Images/cycling.png',
             scaledSize: markerSize
         },
         numbers: {
             url: markerURL,
             scaledSize: markerSize
+        },
+        search: {
+            url: 'src/Images/pin.png',
+            scaledSize: markerSize
         }
     };
 
-    let defaultPos = { lat: 41.499321, lng: -81.694359 };
+    const defaultPos = { lat: 41.499321, lng: -81.694359 };
 
-    var map = new google.maps.Map(document.getElementById('map'), {
+    const map = new google.maps.Map(document.getElementById('map'), {
         zoom: 17,
         mapTypeId: 'roadmap',
         disableDefaultUI: 'true'
     });
+
+    const currentLocation = new google.maps.Marker({
+        map: map,
+        icon: icons.user,
+        title: 'Your location'
+    });
+
+    let prevMarker = currentLocation;
+
+    const bikeLayer = new google.maps.BicyclingLayer();
+    bikeLayer.setMap(map);
+    map.setOptions({styles: stylesArray});
+
+    // Create the search box and link it to the UI element.
+    let input = document.getElementsByClassName('pac-input')[0];
+    let searchBox = new google.maps.places.SearchBox(input);
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -76,32 +95,27 @@ function initAutocomplete() {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
-            let currentLocation = new google.maps.Marker({
-                map: map,
-                icon: icons.user,
-                title: 'Your location'
-            });
 
-            //Puts user marker on map
-            currentLocation.addListener('click', () => {
-                banner(currentLocation);
-            });
             currentLocation.setPosition(userPos);
             map.setCenter(userPos);
         }, () => {
+            //If location services denied
+            currentLocation.setPosition(defaultPos);
             map.setCenter(defaultPos);
         });
     }
     else {
         // Browser doesn't support Geolocation
+        currentLocation.setPosition(defaultPos);
         map.setCenter(defaultPos);
     }
 
-    const bikeLayer = new google.maps.BicyclingLayer();
-    bikeLayer.setMap(map);
-    map.setOptions({styles: stylesArray});
-
-    var previousRack;
+    //Puts user marker on map
+    currentLocation.addListener('click', () => {
+        banner([currentLocation.title, null]);
+        toggleBounce(prevMarker, currentLocation);
+        prevMarker = currentLocation;
+    });
 
     rackLocation.forEach(rack => {
         icons.numbers.url += availableLocks[rack[3]][0] + '.png';
@@ -115,16 +129,11 @@ function initAutocomplete() {
         //Passes the specific rack to display necessary data, location, num locks
         marker.addListener('click', () => {
             banner(rack);
-            previousRack = rack.title;
+            toggleBounce(prevMarker, marker);
+            prevMarker = marker;
         });
         icons.numbers.url = markerURL;
     });
-
-
-    // Create the search box and link it to the UI element.
-    var input = document.getElementsByClassName('pac-input')[0];
-    var searchBox = new google.maps.places.SearchBox(input);
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
 
     // Bias the SearchBox results towards current map's viewport.
     map.addListener('bounds_changed', function() {
@@ -133,37 +142,30 @@ function initAutocomplete() {
 
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
-    searchBox.addListener('places_changed', function() {
-        var places = searchBox.getPlaces();
 
+    let prevSearch;
+    searchBox.addListener('places_changed', function() {
+
+        var places = searchBox.getPlaces();
         if (places.length === 0) {
             return;
         }
 
-        markers = [];
-
         // For each place, get the icon, name and location.
         var bounds = new google.maps.LatLngBounds();
-        places.forEach(function(place) {
-            if (!place.geometry) {
-                console.log("Returned place contains no geometry");
-                return;
-            }
-            var icon = {
-                url: place.icon,
-                size: new google.maps.Size(71, 71),
-                origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(17, 34),
-                scaledSize: new google.maps.Size(25, 25)
-            };
 
+        places.forEach(function(place) {
             // Create a marker for each place.
-            markers.push(new google.maps.Marker({
+            let markers = new google.maps.Marker({
                 map: map,
-                icon: icon,
+                icon: icons.search,
                 title: place.name,
                 position: place.geometry.location
-            }));
+            });
+
+            prevSearch ? prevSearch.setMap(null) : null;
+
+            prevSearch = markers;
 
             if (place.geometry.viewport) {
                 // Only geocodes have viewport.

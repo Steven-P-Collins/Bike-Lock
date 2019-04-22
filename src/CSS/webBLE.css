@@ -1,5 +1,22 @@
 .connect,
+.tutorial,
 .disconnect,
+.no_locks,
 .lock {
+    background-color: #27772b;
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
     display: none;
+    font-family: sans-serif;
+    font-size: larger;
+    font-weight: bold;
+    height: 50px;
+    margin: auto;
+    outline: none;
+    width: 45%;
+}
+
+.no_locks {
+    background-color: red;
 }

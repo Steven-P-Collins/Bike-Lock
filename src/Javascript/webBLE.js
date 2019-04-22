@@ -15,7 +15,8 @@ var availableLocks = {
     'A': [2, 3, 5],
     'B': [1, 5, 5],
     'C': [5, 0, 5],
-    'D': [0, 35, 35]
+    'D': [0, 35, 35],
+    'Your Location': [0, 0, 0]
 };
 
 document.addEventListener('DOMContentLoaded', () => {
