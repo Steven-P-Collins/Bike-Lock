@@ -10,11 +10,18 @@ html, body, #map {
 }
 
 .pac-input {
+    border: none;
+    border-radius: 5px;
     font-size: 2em;
     font-weight: 300;
     height: 2em;
     margin: 5%;
+    outline: none;
     width: 70%;
+}
+
+input[type="text"] {
+    text-align: center;
 }
 
 @media only screen and (min-width: 768px) {
@@ -23,3 +30,4 @@ html, body, #map {
         margin: 5% 12%;
     }
 }
+
