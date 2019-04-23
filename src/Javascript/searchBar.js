@@ -110,11 +110,8 @@ function initAutocomplete() {
         banner([currentLocation.title, null]);
         toggleBounce(prevMarker, currentLocation);
         prevMarker = currentLocation;
-        const userBounds = new google.maps.LatLngBounds();
-        userBounds.extend(currentLocation.position);
-        map.fitBounds(userBounds);
-        map.setZoom(16);
     });
+    //Bug prevents us from using any map movement with other animations
 
     rackLocation.forEach(rack => {
         icons.numbers.url += availableLocks[rack[3]][0] + '.png';
@@ -130,10 +127,6 @@ function initAutocomplete() {
             banner(rack);
             toggleBounce(prevMarker, marker);
             prevMarker = marker;
-            const lockBounds = new google.maps.LatLngBounds();
-            lockBounds.extend(marker.position);
-            map.fitBounds(lockBounds);
-            map.setZoom(16);
         });
         icons.numbers.url = markerURL;
     });
@@ -141,7 +134,8 @@ function initAutocomplete() {
     // Create the search box and link it to the UI element.
     let input = document.getElementsByClassName('pac-input')[0];
     let searchBox = new google.maps.places.SearchBox(input);
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
+    map.controls[google.maps.ControlPosition.LEFT_TOP].push(input);
+
     let prevSearch;
 
     // Bias the SearchBox results towards current map's viewport.
@@ -168,10 +162,7 @@ function initAutocomplete() {
             prevSearch ? prevSearch.setMap(null) : null;
             prevSearch = markers;
 
-            const searchBounds = new google.maps.LatLngBounds();
-            searchBounds.extend(markers.position);
-            map.fitBounds(searchBounds);
-            map.setZoom(16);
+            map.panTo(markers.getPosition());
         });
     });
 }
