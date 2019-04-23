@@ -14,9 +14,32 @@
     height: 50px;
     margin: auto;
     outline: none;
+}
+
+.connect,
+.tutorial,
+.no_locks {
+    width: 95%;
+}
+
+.lock,
+.disconnect {
     width: 45%;
 }
 
 .no_locks {
     background-color: red;
+}
+
+@media only screen and (min-width: 768px) {
+    .connect,
+    .tutorial,
+    .no_locks {
+        width: 45%;
+    }
+
+    .lock,
+    .disconnect {
+        width: 30%;
+    }
 }

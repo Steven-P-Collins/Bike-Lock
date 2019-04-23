@@ -67,7 +67,7 @@ function initAutocomplete() {
     const defaultPos = { lat: 41.499321, lng: -81.694359 };
 
     const map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 17,
+        zoom: 16,
         mapTypeId: 'roadmap',
         disableDefaultUI: 'true'
     });
@@ -83,11 +83,6 @@ function initAutocomplete() {
     const bikeLayer = new google.maps.BicyclingLayer();
     bikeLayer.setMap(map);
     map.setOptions({styles: stylesArray});
-
-    // Create the search box and link it to the UI element.
-    let input = document.getElementsByClassName('pac-input')[0];
-    let searchBox = new google.maps.places.SearchBox(input);
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -116,6 +111,7 @@ function initAutocomplete() {
         toggleBounce(prevMarker, currentLocation);
         prevMarker = currentLocation;
     });
+    //Bug prevents us from using any map movement with other animations
 
     rackLocation.forEach(rack => {
         icons.numbers.url += availableLocks[rack[3]][0] + '.png';
@@ -135,6 +131,13 @@ function initAutocomplete() {
         icons.numbers.url = markerURL;
     });
 
+    // Create the search box and link it to the UI element.
+    let input = document.getElementsByClassName('pac-input')[0];
+    let searchBox = new google.maps.places.SearchBox(input);
+    map.controls[google.maps.ControlPosition.LEFT_TOP].push(input);
+
+    let prevSearch;
+
     // Bias the SearchBox results towards current map's viewport.
     map.addListener('bounds_changed', function() {
         searchBox.setBounds(map.getBounds());
@@ -143,16 +146,9 @@ function initAutocomplete() {
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
 
-    let prevSearch;
     searchBox.addListener('places_changed', function() {
 
         var places = searchBox.getPlaces();
-        if (places.length === 0) {
-            return;
-        }
-
-        // For each place, get the icon, name and location.
-        var bounds = new google.maps.LatLngBounds();
 
         places.forEach(function(place) {
             // Create a marker for each place.
@@ -164,16 +160,9 @@ function initAutocomplete() {
             });
 
             prevSearch ? prevSearch.setMap(null) : null;
-
             prevSearch = markers;
 
-            if (place.geometry.viewport) {
-                // Only geocodes have viewport.
-                bounds.union(place.geometry.viewport);
-            } else {
-                bounds.extend(place.geometry.location);
-            }
+            map.panTo(markers.getPosition());
         });
-        map.fitBounds(bounds);
     });
 }
