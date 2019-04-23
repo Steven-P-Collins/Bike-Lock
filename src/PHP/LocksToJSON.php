@@ -62,7 +62,7 @@ if (mysqli_multi_query($connection,$query)) {
                         $data[$i][0] .=  $row[0] . ", ";
                 }
             }
-        mysqli_free_result($result);
+            mysqli_free_result($result);
         }
         $j++;
         if ($j == 4) {
