@@ -1,6 +1,7 @@
 .burgerButton {
     background-color: #000;
     border-radius: 5px;
+    border: none;
     color: #d3d3d3;
     font-size: 32px;
     height: 51px;
