@@ -108,7 +108,8 @@ function initAutocomplete() {
     //Puts user marker on map
     currentLocation.addListener('click', () => {
         banner([currentLocation.title, null]);
-        toggleBounce(prevMarker, currentLocation);
+        map.panTo(currentLocation.position);
+        setTimeout(toggleBounce, 500, prevMarker, currentLocation);
         prevMarker = currentLocation;
     });
     //Bug prevents us from using any map movement with other animations
@@ -125,7 +126,8 @@ function initAutocomplete() {
         //Passes the specific rack to display necessary data, location, num locks
         marker.addListener('click', () => {
             banner(rack);
-            toggleBounce(prevMarker, marker);
+            map.panTo(marker.position);
+            setTimeout(toggleBounce, 500, prevMarker, marker);
             prevMarker = marker;
         });
         icons.numbers.url = markerURL;
@@ -166,3 +168,7 @@ function initAutocomplete() {
         });
     });
 }
+
+test = function () {
+    alert('hey');
+};
