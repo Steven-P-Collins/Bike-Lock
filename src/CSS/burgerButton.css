@@ -6,7 +6,7 @@
     margin: 5% 82%;
     outline: none;
     position: absolute;
-    width: 14%;
+    width: 44px;
     z-index: 1;
 }
 
@@ -33,6 +33,5 @@
 @media only screen and (min-width: 768px) {
     .burgerButton {
         margin: 5% 86%;
-        width: 14%;
     }
 }
