@@ -12,9 +12,9 @@ html, body, #map {
 .pac-input {
     border: none;
     border-radius: 5px;
-    font-size: 2em;
+    font-size: 28px;
     font-weight: 300;
-    height: 38px;
+    height: 50px;
     margin: 5%;
     outline: none;
     width: 70%;
