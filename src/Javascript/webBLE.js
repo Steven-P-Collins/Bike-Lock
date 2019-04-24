@@ -5,6 +5,7 @@ var battChar;
 var lockChar;
 var lockNotChar;
 var pass = new Uint16Array([0x1111]);
+var lockID = 'Bike Lock';
 
 /*
     Available Locks holds the key followed by
@@ -42,7 +43,7 @@ function connect() {
     navigator.bluetooth.requestDevice(
         {
             filters: [
-                {name: ['Bike Lock']}
+                {name: [lockID]}
             ],
             // acceptAllDevices: true,
             optionalServices: [0xB10C]
@@ -51,6 +52,7 @@ function connect() {
             bleDevice = device;
             console.log('Connecting to GATT Server...');
             return device.gatt.connect();
+            getPass();
         })
         .then(server => {
             bleServer = server;
@@ -161,4 +163,40 @@ function newP() {
 	console.log(pass);
 	//Allows buttons to reappear after state change completed
     buttonDisplay(2);
+    storePass();
+}
+
+function storePass() {
+    if (window.XMLHttpRequest) {
+        xmlhttpPOST = new XMLHttpRequest();
+    } else {
+        xmlhttpPOST = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xmlhttpPOST.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+        }
+    };
+
+    xmlhttpPOST.open("POST", "src/PHP/postPIN.php?id="+lockID+"&p="+pass, true);
+    xmlhttpPOST.send();
+}
+
+function getPass() {
+    if (window.XMLHttpRequest) {
+        xmlhttpGET = new XMLHttpRequest();
+    } else {
+        xmlhttpGET = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xmlhttpGET.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            pass = this.responseText;
+        }
+    };
+
+    xmlhttpGET.open("GET", "src/PHP/getData.php?id="+lockID, true);
+    xmlhttpGET.send();
+
 }
