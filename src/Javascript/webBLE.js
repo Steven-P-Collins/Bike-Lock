@@ -46,7 +46,6 @@ function connect() {
             filters: [
                 {name: [lockID]}
             ],
-            // acceptAllDevices: true,
             optionalServices: [0xB10C]
         })
         .then(device => {
@@ -147,7 +146,7 @@ function onChanged(event) {
 //this function will move the stepper motor
 function lock() {
     //Hides buttons so users cannot disconnect while state changing
-    buttonDisplay(0);
+    buttonDisplay(4);
 	lockChar.writeValue(pass)
         .then(_ => {
             console.log('Lock characteristic changed to: ' + pass);
@@ -164,15 +163,13 @@ function newP() {
 	console.log(pass);
 	//Allows buttons to reappear after state change completed
     buttonDisplay(2);
+    lockingDisplay(null);
     storePass();
 }
 
 function storePass() {
-    if (window.XMLHttpRequest) {
-        xmlhttpPOST = new XMLHttpRequest();
-    } else {
-        xmlhttpPOST = new ActiveXObject("Microsoft.XMLHTTP");
-    }
+    xmlhttpGET = window.XMLHttpRequest ? new XMLHttpRequest()
+        : new ActiveXObject("Microsoft.XMLHTTP");
 
     xmlhttpPOST.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
@@ -185,11 +182,8 @@ function storePass() {
 }
 
 function getPass() {
-    if (window.XMLHttpRequest) {
-        xmlhttpGET = new XMLHttpRequest();
-    } else {
-        xmlhttpGET = new ActiveXObject("Microsoft.XMLHTTP");
-    }
+    xmlhttpGET = window.XMLHttpRequest ? new XMLHttpRequest()
+        : new ActiveXObject("Microsoft.XMLHTTP");
 
     xmlhttpGET.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
