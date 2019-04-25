@@ -38,7 +38,7 @@ const stylesArray = [
     }
 ];
 
-var rackLocation;
+var rackLocation = [];
 //Grab rack locations for variable rackLocation
 getRacks();
 var test = [
