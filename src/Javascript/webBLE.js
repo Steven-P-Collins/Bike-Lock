@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementsByClassName("connect")[0].onclick = connect;
     document.getElementsByClassName("disconnect")[0].onclick = disconnect;
     document.getElementsByClassName("lock")[0].onclick = lock;
+    // document.getElementsByClassName('nearest_Lock')[0] = nearestLock;
 });
 
 //For now the out put is just to the console. if you call the function it will do what you expect.
@@ -51,8 +52,8 @@ function connect() {
         .then(device => {
             bleDevice = device;
             console.log('Connecting to GATT Server...');
-            return device.gatt.connect();
             getPass();
+            return device.gatt.connect();
         })
         .then(server => {
             bleServer = server;
@@ -174,7 +175,7 @@ function storePass() {
     }
 
     xmlhttpPOST.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
+        if (this.readyState === 4 && this.status === 200) {
             console.log(this.responseText);
         }
     };
@@ -191,7 +192,7 @@ function getPass() {
     }
 
     xmlhttpGET.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
+        if (this.readyState === 4 && this.status === 200) {
             pass = this.responseText;
         }
     };

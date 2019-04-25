@@ -45,7 +45,11 @@ var rackLocation = [
     ['Sherwin Williams HQ', 41.496804, -81.692058, 'D']
 ];
 
+var userPos = { lat: 41.499321, lng: -81.694359 };
+
+
 function initAutocomplete() {
+
     //Needs to be inside this function
     const markerSize = new google.maps.Size(50, 50);
     const markerURL = 'src/Images/number_';
@@ -63,8 +67,6 @@ function initAutocomplete() {
             scaledSize: markerSize
         }
     };
-
-    const defaultPos = { lat: 41.499321, lng: -81.694359 };
 
     const map = new google.maps.Map(document.getElementById('map'), {
         zoom: 16,
@@ -86,24 +88,26 @@ function initAutocomplete() {
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
-            let userPos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
+            userPos.lat = position.coords.latitude;
+            userPos.lng = position.coords.longitude;
 
             currentLocation.setPosition(userPos);
             map.setCenter(userPos);
         }, () => {
             //If location services denied
-            currentLocation.setPosition(defaultPos);
-            map.setCenter(defaultPos);
+            currentLocation.setPosition(userPos);
+            map.setCenter(userPos);
         });
     }
     else {
         // Browser doesn't support Geolocation
-        currentLocation.setPosition(defaultPos);
-        map.setCenter(defaultPos);
+        currentLocation.setPosition(userPos);
+        map.setCenter(userPos);
     }
+
+    // document.getElementsByClassName('nearest_lock')[0].onclick = () => {
+    //     nearestLock(currentLocation.position);
+    // };
 
     //Puts user marker on map
     currentLocation.addListener('click', () => {
@@ -168,7 +172,3 @@ function initAutocomplete() {
         });
     });
 }
-
-test = function () {
-    alert('hey');
-};
