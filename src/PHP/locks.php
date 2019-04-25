@@ -66,7 +66,7 @@ if (mysqli_multi_query($connection,$query)) {
         }
         $j++;
         if ($j == 4) {
-            $j = 0;
+            $j = 1;
             $i++;
         }
     }

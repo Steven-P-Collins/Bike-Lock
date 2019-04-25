@@ -18,9 +18,9 @@ getLocks();
 
 // = {
 //     'A': [2, 3, 5],
-//     'B': [1, 5, 5],
+//     'B': [1, 4, 5],
 //     'C': [5, 0, 5],
-//     'D': [0, 35, 35]
+//     'D': [0, 3, 3]
 // };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -205,8 +205,8 @@ function getLocks() {
 
     xmlhttpGET.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-            // availableLocks = JSON.parse(this.responseText);
-            alert(this.responseText);
+            availableLocks = JSON.parse(this.responseText);
+            alert(availableLocks);
         }
     };
 
