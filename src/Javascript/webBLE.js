@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementsByClassName("disconnect")[0].onclick = disconnect;
     document.getElementsByClassName("lock")[0].onclick = lock;
     // document.getElementsByClassName('nearest_Lock')[0] = nearestLock;
+    console.log(rackLocation);
 });
 
 //For now the out put is just to the console. if you call the function it will do what you expect.
