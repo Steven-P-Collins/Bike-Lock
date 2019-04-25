@@ -16,12 +16,12 @@ var availableLocks = {};
 //Grab lock locations for webBLE variable availableLocks
 getLocks();
 
-// = {
-//     '1': [2, 3, 5],
-//     '2': [1, 4, 5],
-//     '3': [5, 0, 5],
-//     '4': [0, 3, 3]
-// };
+tester = {
+    '1': [2, 3, 5],
+    '2': [1, 4, 5],
+    '3': [5, 0, 5],
+    '4': [0, 3, 3]
+};
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementsByClassName("connect")[0].onclick = connect;

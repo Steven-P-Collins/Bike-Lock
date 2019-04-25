@@ -121,7 +121,7 @@ function initAutocomplete() {
     });
     //Bug prevents us from using any map movement with other animations
 
-    console.log('avail locks: '+availableLocks);
+    console.log('avail locks: '+tester);
     console.log('racks: ' + rackLocation);
     rackLocation.forEach(rack => {
         console.log('avail locks inner: '+availableLocks.rack[3]);
