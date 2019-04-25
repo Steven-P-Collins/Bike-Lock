@@ -50,6 +50,10 @@ var userPos = { lat: 41.499321, lng: -81.694359 };
 
 
 function initAutocomplete() {
+    //Grab lock locations for webBLE variable availableLocks
+    getLocks();
+    //Grab rack locations for variable rackLocation
+    getRacks();
 
     //Needs to be inside this function
     const markerSize = new google.maps.Size(50, 50);
@@ -119,24 +123,24 @@ function initAutocomplete() {
     });
     //Bug prevents us from using any map movement with other animations
 
-    // rackLocation.forEach(rack => {
-    //     icons.numbers.url += availableLocks[rack[3]][0] + '.png';
-    //     let marker = new google.maps.Marker({
-    //         position: {lat: rack[1], lng: rack[2]},
-    //         map: map,
-    //         icon: icons.numbers,
-    //         title: rack[0]
-    //     });
-    //
-    //     //Passes the specific rack to display necessary data, location, num locks
-    //     marker.addListener('click', () => {
-    //         banner(rack);
-    //         map.panTo(marker.position);
-    //         setTimeout(toggleBounce, 500, prevMarker, marker);
-    //         prevMarker = marker;
-    //     });
-    //     icons.numbers.url = markerURL;
-    // });
+    rackLocation.forEach(rack => {
+        icons.numbers.url += availableLocks[rack[3]][0] + '.png';
+        let marker = new google.maps.Marker({
+            position: {lat: rack[1], lng: rack[2]},
+            map: map,
+            icon: icons.numbers,
+            title: rack[0]
+        });
+
+        //Passes the specific rack to display necessary data, location, num locks
+        marker.addListener('click', () => {
+            banner(rack);
+            map.panTo(marker.position);
+            setTimeout(toggleBounce, 500, prevMarker, marker);
+            prevMarker = marker;
+        });
+        icons.numbers.url = markerURL;
+    });
 
     // Create the search box and link it to the UI element.
     let input = document.getElementsByClassName('pac-input')[0];
