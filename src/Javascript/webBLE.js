@@ -206,10 +206,6 @@ function getLocks() {
     xmlhttpGET.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             availableLocks = JSON.parse(this.responseText);
-            for (i = 0; i < availableLocks.length; i++) {
-                console.log(availableLocks.i);
-                availableLocks.i = parseInt(availableLocks.i);
-            }
         }
     };
 
