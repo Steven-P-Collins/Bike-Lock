@@ -18,8 +18,10 @@ userMarker = function (banner, title) {
 
 lockMarker = function  (banner, title) {
     banner.id = title[0];
+    let lockCode = title[3] - 1;
 
-    if (availableLocks[title[3]][0] === 0) {
+
+    if (availableLocks[title[3]][0][6] === 0) {
         buttonDisplay(0);
     }
     else if (!bleDevice || !bleDevice.gatt.connected) {
