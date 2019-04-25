@@ -190,7 +190,7 @@ function getPass() {
         }
     };
 
-    xmlhttpGET.open("GET", "src/PHP/getData.php?id="+lockID, true);
+    xmlhttpGET.open("GET", "src/PHP/getPIN.php?id="+lockID, true);
     xmlhttpGET.send();
 
 }

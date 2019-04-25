@@ -1,5 +1,5 @@
 <?php
-$id = intval($_GET['id']);
+$id = urldecode($_GET['id']);
 
 $servername = "127.0.0.1";
 $user = "root";
