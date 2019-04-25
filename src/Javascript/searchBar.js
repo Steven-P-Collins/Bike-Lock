@@ -121,16 +121,16 @@ function initAutocomplete() {
     });
     //Bug prevents us from using any map movement with other animations
 
-    console.log('avail locks: '+availableLocks[0][0][6]);
-    console.log('all locks: ' + availableLocks[1][0][6]);
+    // console.log('avail locks: '+availableLocks[0][0][6]);
+    // console.log('all locks: ' + availableLocks[1][0][6]);
     rackLocation.forEach(rack => {
 
         // console.log('rack #: '+ rack[3]);
-        icons.numbers.url += availableLocks[rack[3]][0][6] + '.png';
+        // icons.numbers.url += availableLocks[rack[3]][0][6] + '.png';
         let marker = new google.maps.Marker({
             position: {lat: parseFloat(rack[1]), lng: parseFloat(rack[2])},
             map: map,
-            icon: icons.numbers,
+            // icon: icons.numbers,
             title: rack[0]
         });
 
