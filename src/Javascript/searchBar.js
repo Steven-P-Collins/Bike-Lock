@@ -123,8 +123,9 @@ function initAutocomplete() {
 
     alert(availableLocks);
     rackLocation.forEach(rack => {
-        alert(rack[3]);
-        // alert(availableLocks[rack[3][0]]);
+        alert('rack #: '+rack[3]);
+        alert('Avail lock #: '+availableLocks[rack[3][0]]);
+
         icons.numbers.url += availableLocks[rack[3]][0] + '.png';
         let marker = new google.maps.Marker({
             position: {lat: parseFloat(rack[1]), lng: parseFloat(rack[2])},
