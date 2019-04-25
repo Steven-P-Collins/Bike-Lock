@@ -13,6 +13,9 @@ var lockID = 'Bike Lock';
  */
 
 var availableLocks;
+//Grab lock locations for webBLE variable availableLocks
+getLocks();
+
 // = {
 //     'A': [2, 3, 5],
 //     'B': [1, 5, 5],
@@ -21,16 +24,10 @@ var availableLocks;
 // };
 
 document.addEventListener('DOMContentLoaded', () => {
-    //Grab lock locations for webBLE variable availableLocks
-    getLocks();
-    //Grab rack locations for variable rackLocation
-    getRacks();
     document.getElementsByClassName("connect")[0].onclick = connect;
     document.getElementsByClassName("disconnect")[0].onclick = disconnect;
     document.getElementsByClassName("lock")[0].onclick = lock;
     // document.getElementsByClassName('nearest_Lock')[0] = nearestLock;
-    console.log(rackLocation);
-    console.log(availableLocks);
 });
 
 //For now the out put is just to the console. if you call the function it will do what you expect.
@@ -208,8 +205,7 @@ function getLocks() {
 
     xmlhttpGET.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-            console.log(this.responseText);
-            availableLocks = "<?php echo $locks?>";
+            availableLocks = this.responseText;
         }
     };
 

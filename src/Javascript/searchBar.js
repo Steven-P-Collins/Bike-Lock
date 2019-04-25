@@ -38,7 +38,9 @@ const stylesArray = [
     }
 ];
 
-var rackLocation = [];
+var rackLocation;
+//Grab rack locations for variable rackLocation
+getRacks();
 // = [
 //     ['Tremont Athletic East', 41.508821, -81.602177, 'A'],
 //     ['Washkewicz School of Engineering', 41.503503, -81.673287, 'B'],
@@ -119,6 +121,9 @@ function initAutocomplete() {
     });
     //Bug prevents us from using any map movement with other animations
 
+    console.log('Racks: ' + rackLocation);
+    console.log('Locks: ' + availableLocks);
+
     // rackLocation.forEach(rack => {
     //     icons.numbers.url += availableLocks[rack[3]][0] + '.png';
     //     let marker = new google.maps.Marker({
@@ -180,7 +185,7 @@ function getRacks() {
 
     xmlhttpGET.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-            console.log(document.getElementById('myPhpValue').value);
+            rackLocation = this.responseText;
         }
     };
 
