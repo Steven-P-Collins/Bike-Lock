@@ -21,7 +21,7 @@ lockMarker = function  (banner, title) {
     let lockCode = title[3] - 1;
 
 
-    if (availableLocks[title[3]][0][6] === 0) {
+    if (availableLocks[lockCode][0][6] === 0) {
         buttonDisplay(0);
     }
     else if (!bleDevice || !bleDevice.gatt.connected) {
