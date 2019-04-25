@@ -1,5 +1,5 @@
 <?php
-$id = intval($_GET['id']);
+$id = urldecode($_GET['id']);
 $newPIN = intval($_GET['p']);
 
 $servername = "127.0.0.1";
