@@ -12,6 +12,7 @@ banner = function (location) {
 
 userMarker = function (banner, title) {
     banner.id = title;
+    //show tutorial
     buttonDisplay(3);
 };
 
@@ -22,7 +23,7 @@ lockMarker = function  (banner, title) {
         buttonDisplay(0);
     }
     else if (!bleDevice || !bleDevice.gatt.connected) {
-        buttonDisplay(2);
+        buttonDisplay(1);
     }
     else if (bleDevice.gatt.connected) {
         buttonDisplay(2);
@@ -36,8 +37,10 @@ buttonDisplay = function (choice) {
     let lockButton = document.getElementsByClassName('lock')[0];
     let tutorial = document.getElementsByClassName('tutorial')[0].style;
     let noLocks = document.getElementsByClassName('no_locks')[0].style;
+    let locking = document.getElementsByClassName('banner_Locking')[0];
 
     if (choice === 0) {
+        locking.style.display = 'none';
         lockButton.style.display = 'none';
         connectButton.display = 'none';
         disconnectButton.display = 'none';
@@ -51,19 +54,30 @@ buttonDisplay = function (choice) {
         disconnectButton.display = 'none';
         tutorial.display = 'none';
         noLocks.display = 'none';
+        locking.style.display = 'none';
     }
     else if (choice === 2) {
+        locking.style.display = 'none';
         lockButton.style.display = 'inline-block';
         connectButton.display = 'none';
         disconnectButton.display = 'inline-block';
         tutorial.display = 'none';
         noLocks.display = 'none';
     }
-    else {
+    else if (choice === 3) {
+        locking.style.display = 'none';
         lockButton.style.display = 'none';
         connectButton.display = 'none';
         disconnectButton.display = 'none';
         tutorial.display = 'block';
+        noLocks.display = 'none';
+    }
+    else {
+        lockingDisplay(locking);
+        lockButton.style.display = 'none';
+        connectButton.display = 'none';
+        disconnectButton.display = 'none';
+        tutorial.display = 'none';
         noLocks.display = 'none';
     }
 };
@@ -89,3 +103,29 @@ toggleBounce = function (prevMarker, marker) {
         marker.setAnimation(null);
     }
 };
+
+// nearestLock = function () {
+//
+// };
+
+//Displays locking load ... when locking
+lockingDisplay = function (locking) {
+    locking === null ? document.getElementsByClassName('banner_locking')[0].innerHTML = 'Locking' :
+        (locking.style.display = 'block', typeWriter(locking, null));
+};
+
+//Recursive function to type out ... for locking
+function typeWriter(locking, i) {
+    i = i === null ? 0 : i;
+
+    if (i !== 3 && i !== 7) {
+        locking.innerHTML += '.';
+        i++;
+        setTimeout(typeWriter, 500, locking, i);
+    }
+    else if (i === 3) {
+        locking.innerHTML = 'Locking';
+        i++;
+        setTimeout(typeWriter, 500, locking, i)
+    }
+}

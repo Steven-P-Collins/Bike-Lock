@@ -1,3 +1,4 @@
+.banner_Locking,
 .connect,
 .tutorial,
 .disconnect,
@@ -16,6 +17,7 @@
     outline: none;
 }
 
+.banner_Locking,
 .connect,
 .tutorial,
 .no_locks {
@@ -31,7 +33,12 @@
     background-color: red;
 }
 
+.nearest_Lock {
+    display: none;
+}
+
 @media only screen and (min-width: 768px) {
+    .banner_Locking,
     .connect,
     .tutorial,
     .no_locks {

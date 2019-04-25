@@ -16,14 +16,14 @@ var availableLocks = {
     'A': [2, 3, 5],
     'B': [1, 5, 5],
     'C': [5, 0, 5],
-    'D': [0, 35, 35],
-    'Your Location': [0, 0, 0]
+    'D': [0, 35, 35]
 };
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementsByClassName("connect")[0].onclick = connect;
     document.getElementsByClassName("disconnect")[0].onclick = disconnect;
     document.getElementsByClassName("lock")[0].onclick = lock;
+    // document.getElementsByClassName('nearest_Lock')[0] = nearestLock;
 });
 
 //For now the out put is just to the console. if you call the function it will do what you expect.
@@ -45,14 +45,13 @@ function connect() {
             filters: [
                 {name: [lockID]}
             ],
-            // acceptAllDevices: true,
             optionalServices: [0xB10C]
         })
         .then(device => {
             bleDevice = device;
             console.log('Connecting to GATT Server...');
-            return device.gatt.connect();
             getPass();
+            return device.gatt.connect();
         })
         .then(server => {
             bleServer = server;
@@ -146,7 +145,7 @@ function onChanged(event) {
 //this function will move the stepper motor
 function lock() {
     //Hides buttons so users cannot disconnect while state changing
-    buttonDisplay(0);
+    buttonDisplay(4);
 	lockChar.writeValue(pass)
         .then(_ => {
             console.log('Lock characteristic changed to: ' + pass);
@@ -163,15 +162,13 @@ function newP() {
 	console.log(pass);
 	//Allows buttons to reappear after state change completed
     buttonDisplay(2);
+    lockingDisplay(null);
     storePass();
 }
 
 function storePass() {
-    if (window.XMLHttpRequest) {
-        xmlhttpPOST = new XMLHttpRequest();
-    } else {
-        xmlhttpPOST = new ActiveXObject("Microsoft.XMLHTTP");
-    }
+    xmlhttpGET = window.XMLHttpRequest ? new XMLHttpRequest()
+        : new ActiveXObject("Microsoft.XMLHTTP");
 
     xmlhttpPOST.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
@@ -184,11 +181,8 @@ function storePass() {
 }
 
 function getPass() {
-    if (window.XMLHttpRequest) {
-        xmlhttpGET = new XMLHttpRequest();
-    } else {
-        xmlhttpGET = new ActiveXObject("Microsoft.XMLHTTP");
-    }
+    xmlhttpGET = window.XMLHttpRequest ? new XMLHttpRequest()
+        : new ActiveXObject("Microsoft.XMLHTTP");
 
     xmlhttpGET.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
