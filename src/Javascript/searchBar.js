@@ -118,15 +118,15 @@ function initAutocomplete() {
     //Bug prevents us from using any map movement with other animations
 
     rackLocation.forEach(rack => {
-        alert('rack #: '+rack[3]);
-        let lockCode = rack[3]-1;
-        alert('Avail lock #: '+availableLocks[lockCode][0][6]);
+        // alert('rack #: '+rack[3]);
+        // let lockCode = rack[3]-1;
+        // alert('Avail lock #: '+availableLocks[lockCode][0][6]);
 
-        // icons.numbers.url += availableLocks[rack[3]][0] + '.png';
+        icons.numbers.url += availableLocks[lockCode][0] + '.png';
         let marker = new google.maps.Marker({
             position: {lat: parseFloat(rack[1]), lng: parseFloat(rack[2])},
             map: map,
-            // icon: icons.numbers,
+            icon: icons.numbers,
             title: rack[0]
         });
 
