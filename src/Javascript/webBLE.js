@@ -12,12 +12,13 @@ var lockID = 'Bike Lock';
     [Free locks, Locks in use, Total Locks]
  */
 
-var availableLocks = {
-    'A': [2, 3, 5],
-    'B': [1, 5, 5],
-    'C': [5, 0, 5],
-    'D': [0, 35, 35]
-};
+var availableLocks;
+// = {
+//     'A': [2, 3, 5],
+//     'B': [1, 5, 5],
+//     'C': [5, 0, 5],
+//     'D': [0, 35, 35]
+// };
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementsByClassName("connect")[0].onclick = connect;

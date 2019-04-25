@@ -38,12 +38,13 @@ const stylesArray = [
     }
 ];
 
-var rackLocation = [
-    ['Tremont Athletic East', 41.508821, -81.602177, 'A'],
-    ['Washkewicz School of Engineering', 41.503503, -81.673287, 'B'],
-    ['Climb Cleveland', 41.482013, -81.687308, 'C'],
-    ['Sherwin Williams HQ', 41.496804, -81.692058, 'D']
-];
+var rackLocation;
+// = [
+//     ['Tremont Athletic East', 41.508821, -81.602177, 'A'],
+//     ['Washkewicz School of Engineering', 41.503503, -81.673287, 'B'],
+//     ['Climb Cleveland', 41.482013, -81.687308, 'C'],
+//     ['Sherwin Williams HQ', 41.496804, -81.692058, 'D']
+// ];
 
 var userPos = { lat: 41.499321, lng: -81.694359 };
 
