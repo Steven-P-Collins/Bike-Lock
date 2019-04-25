@@ -5,38 +5,38 @@
 // This example requires the Places library. Include the libraries=places
 // parameter when you first load the API. For example:
 
-// const stylesArray = [
-//     {
-//         featureType: 'all',
-//         stylers: [
-//             {visibility: 'off'}
-//         ]
-//     },
-//     {
-//         featureType: 'road',
-//         stylers: [
-//             {visibility: 'on'}
-//         ]
-//     },
-//     {
-//         featureType: 'landscape',
-//         stylers: [
-//             {visibility: 'on'}
-//         ]
-//     },
-//     {
-//         featureType: 'water',
-//         stylers: [
-//             {visibility: 'on'}
-//         ]
-//     },
-//     {
-//         featureType: 'poi.park',
-//         stylers: [
-//             {visibility: 'on'}
-//         ]
-//     }
-// ];
+const stylesArray = [
+    {
+        featureType: 'all',
+        stylers: [
+            {visibility: 'off'}
+        ]
+    },
+    {
+        featureType: 'road',
+        stylers: [
+            {visibility: 'on'}
+        ]
+    },
+    {
+        featureType: 'landscape',
+        stylers: [
+            {visibility: 'on'}
+        ]
+    },
+    {
+        featureType: 'water',
+        stylers: [
+            {visibility: 'on'}
+        ]
+    },
+    {
+        featureType: 'poi.park',
+        stylers: [
+            {visibility: 'on'}
+        ]
+    }
+];
 
 var rackLocation;
 //Grab rack locations for variable rackLocation
