@@ -174,7 +174,7 @@ function storePass() {
     }
 
     xmlhttpPOST.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
+        if (this.readyState === 4 && this.status === 200) {
             console.log(this.responseText);
         }
     };
@@ -191,12 +191,12 @@ function getPass() {
     }
 
     xmlhttpGET.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
+        if (this.readyState === 4 && this.status === 200) {
             pass = this.responseText;
         }
     };
 
-    xmlhttpGET.open("GET", "src/PHP/getData.php?id="+lockID, true);
+    xmlhttpGET.open("GET", "src/PHP/getPIN.php?id="+lockID, true);
     xmlhttpGET.send();
 
 }

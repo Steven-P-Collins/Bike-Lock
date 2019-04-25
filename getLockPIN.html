@@ -5,6 +5,7 @@
     <title>Lock PIN Stuff</title>
 </head>
 <script>
+    var lockID = 'Bike Lock';
     var currentPIN;
 
     window.onload = function () {
@@ -24,7 +25,7 @@
                 alert(currentPIN);
             }
         };
-        xmlhttp.open("GET", "src/PHP/pinData.php?q=11", true);
+        xmlhttp.open("GET", "src/PHP/getPIN.php?id="+lockID, true);
         xmlhttp.send();
     }
 </script>
