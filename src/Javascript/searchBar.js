@@ -42,10 +42,10 @@ var rackLocation;
 //Grab rack locations for variable rackLocation
 getRacks();
 var test = [
-    ['Tremont Athletic East', 41.508821, -81.602177, 'A'],
-    ['Washkewicz School of Engineering', 41.503503, -81.673287, 'B'],
-    ['Climb Cleveland', 41.482013, -81.687308, 'C'],
-    ['Sherwin Williams HQ', 41.496804, -81.692058, 'D']
+    ['Tremont Athletic East', 41.508821, -81.602177, '3'],
+    ['Washkewicz School of Engineering', 41.503503, -81.673287, '2'],
+    ['Climb Cleveland', 41.482013, -81.687308, '4'],
+    ['Sherwin Williams HQ', 41.496804, -81.692058, '1']
 ];
 
 var userPos = { lat: 41.499321, lng: -81.694359 };
@@ -121,10 +121,11 @@ function initAutocomplete() {
     });
     //Bug prevents us from using any map movement with other animations
 
-    alert(availableLocks);
+    console.log('avail locks: '+availableLocks);
+    console.log('racks: ' + rackLocation);
     rackLocation.forEach(rack => {
-        alert('rack #: '+rack[3]);
-        alert('Avail lock #: '+availableLocks[rack[3][0]]);
+        // alert('rack #: '+rack[3]);
+        // alert('Avail lock #: '+availableLocks[rack[3][0]]);
 
         icons.numbers.url += availableLocks[rack[3]][0] + '.png';
         let marker = new google.maps.Marker({

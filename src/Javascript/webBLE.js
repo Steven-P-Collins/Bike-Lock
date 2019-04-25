@@ -17,10 +17,10 @@ var availableLocks;
 getLocks();
 
 // = {
-//     'A': [2, 3, 5],
-//     'B': [1, 4, 5],
-//     'C': [5, 0, 5],
-//     'D': [0, 3, 3]
+//     '1': [2, 3, 5],
+//     '2': [1, 4, 5],
+//     '3': [5, 0, 5],
+//     '4': [0, 3, 3]
 // };
 
 document.addEventListener('DOMContentLoaded', () => {
