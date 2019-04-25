@@ -30,12 +30,12 @@ while ($row = @mysqli_fetch_assoc($result)) {
 }
 
 $data = json_encode($data);
+// TODO, echo data to searchBar.js
+echo $data;
 
-$filename = 'markers.json';
-if(file_put_contents($filename, $data)) {
-    echo 'JSON created';
-} else {
-    echo 'Fucked up, pal';
-}
-
-?>
+//$filename = 'markers.json';
+//if(file_put_contents($filename, $data)) {
+//    echo 'JSON created';
+//} else {
+//    echo 'Fucked up, pal';
+//}

@@ -74,12 +74,12 @@ if (mysqli_multi_query($connection,$query)) {
 }
 
 $data = json_encode($data);
+// TODO, echo data to webBLE.js
+echo $data;
 
-$filename = 'locks.json';
-if(file_put_contents($filename, $data)) {
-    echo 'JSON created';
-} else {
-    echo 'Fucked up, pal';
-}
-
-?>
+//$filename = 'locks.json';
+//if(file_put_contents($filename, $data)) {
+//    echo 'JSON created';
+//} else {
+//    echo 'Fucked up, pal';
+//}
