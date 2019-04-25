@@ -38,7 +38,7 @@ const stylesArray = [
     }
 ];
 
-var rackLocation;
+var rackLocation = [];
 // = [
 //     ['Tremont Athletic East', 41.508821, -81.602177, 'A'],
 //     ['Washkewicz School of Engineering', 41.503503, -81.673287, 'B'],
