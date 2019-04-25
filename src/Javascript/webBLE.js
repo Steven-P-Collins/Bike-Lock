@@ -195,3 +195,18 @@ function getPass() {
     xmlhttpGET.send();
 
 }
+
+function getLocks() {
+    xmlhttpGET = window.XMLHttpRequest ? new XMLHttpRequest()
+        : new ActiveXObject("Microsoft.XMLHTTP");
+
+    xmlhttpGET.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            availableLocks = this.responseText;
+        }
+    };
+
+    xmlhttpGET.open("GET", "src/PHP/locks.php?", true);
+    xmlhttpGET.send();
+
+}

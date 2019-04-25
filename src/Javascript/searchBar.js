@@ -50,6 +50,10 @@ var userPos = { lat: 41.499321, lng: -81.694359 };
 
 
 function initAutocomplete() {
+    //Grab lock locations for webBLE variable availableLocks
+    getLocks();
+    //Grab rack locations for variable rackLocation
+    getRacks();
 
     //Needs to be inside this function
     const markerSize = new google.maps.Size(50, 50);
@@ -172,4 +176,19 @@ function initAutocomplete() {
             map.panTo(markers.getPosition());
         });
     });
+}
+
+function getRacks() {
+    xmlhttpGET = window.XMLHttpRequest ? new XMLHttpRequest()
+        : new ActiveXObject("Microsoft.XMLHTTP");
+
+    xmlhttpGET.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            rackLocation = this.responseText;
+        }
+    };
+
+    xmlhttpGET.open("GET", "src/PHP/racks.php?", true);
+    xmlhttpGET.send();
+
 }
