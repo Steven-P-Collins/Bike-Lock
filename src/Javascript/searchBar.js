@@ -119,7 +119,7 @@ function initAutocomplete() {
 
     rackLocation.forEach(rack => {
         // alert('rack #: '+rack[3]);
-        // let lockCode = rack[3]-1;
+        let lockCode = rack[3]-1;
         // alert('Avail lock #: '+availableLocks[lockCode][0][6]);
 
         icons.numbers.url += availableLocks[lockCode][0] + '.png';
