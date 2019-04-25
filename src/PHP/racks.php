@@ -11,7 +11,7 @@ if (!$connection) {
 }
 
 $racks = array(
-    array()
+//    array()
 );
 $query = "SELECT * FROM Rack";
 $result = $connection->query($query);
