@@ -11,7 +11,6 @@ if (!$connection) {
 }
 
 $locks = array(
-    array()
 );
 $names = "SELECT rack FROM LockDevice";
 
