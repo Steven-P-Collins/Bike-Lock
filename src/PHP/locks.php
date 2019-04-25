@@ -73,7 +73,7 @@ if (mysqli_multi_query($connection,$query)) {
     while (mysqli_more_results($connection));
 }
 
-echo json_encode($locks);
+echo json_encode($locks, JSON_FORCE_OBJECT);
 
 //$locks = json_encode($locks);
 //// TODO, echo data to webBLE.js

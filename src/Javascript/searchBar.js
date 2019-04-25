@@ -41,12 +41,12 @@ const stylesArray = [
 var rackLocation;
 //Grab rack locations for variable rackLocation
 getRacks();
-var test = [
-    ['Tremont Athletic East', 41.508821, -81.602177, '3'],
-    ['Washkewicz School of Engineering', 41.503503, -81.673287, '2'],
-    ['Climb Cleveland', 41.482013, -81.687308, '4'],
-    ['Sherwin Williams HQ', 41.496804, -81.692058, '1']
-];
+// var test = [
+//     ['Tremont Athletic East', 41.508821, -81.602177, '3'],
+//     ['Washkewicz School of Engineering', 41.503503, -81.673287, '2'],
+//     ['Climb Cleveland', 41.482013, -81.687308, '4'],
+//     ['Sherwin Williams HQ', 41.496804, -81.692058, '1']
+// ];
 
 var userPos = { lat: 41.499321, lng: -81.694359 };
 
@@ -121,7 +121,7 @@ function initAutocomplete() {
     });
     //Bug prevents us from using any map movement with other animations
 
-    console.log('avail locks: '+tester);
+    console.log('avail locks: '+availableLocks);
     console.log('racks: ' + rackLocation);
     rackLocation.forEach(rack => {
         console.log('avail locks inner: '+availableLocks.rack[3]);
