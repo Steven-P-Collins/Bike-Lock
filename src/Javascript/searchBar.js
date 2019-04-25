@@ -122,7 +122,7 @@ function initAutocomplete() {
         let lockCode = rack[3]-1;
         // alert('Avail lock #: '+availableLocks[lockCode][0][6]);
 
-        icons.numbers.url += availableLocks[lockCode][0] + '.png';
+        icons.numbers.url += availableLocks[lockCode][0][6] + '.png';
         let marker = new google.maps.Marker({
             position: {lat: parseFloat(rack[1]), lng: parseFloat(rack[2])},
             map: map,
