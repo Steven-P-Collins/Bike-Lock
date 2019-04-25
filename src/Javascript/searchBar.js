@@ -121,6 +121,7 @@ function initAutocomplete() {
     });
     //Bug prevents us from using any map movement with other animations
 
+    alert(availableLocks);
     rackLocation.forEach(rack => {
         alert(rack[3]);
         // alert(availableLocks[rack[3][0]]);
