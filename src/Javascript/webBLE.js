@@ -12,7 +12,7 @@ var lockID = 'Bike Lock';
     [Free locks, Locks in use, Total Locks]
  */
 
-var availableLocks;
+var availableLocks = {};
 //Grab lock locations for webBLE variable availableLocks
 getLocks();
 
