@@ -121,7 +121,7 @@ function initAutocomplete() {
     });
     //Bug prevents us from using any map movement with other animations
 
-    alert(test.length);
+    alert(rackLocation.length);
 
     rackLocation.forEach(rack => {
         icons.numbers.url += availableLocks[rack[3]][0] + '.png';
