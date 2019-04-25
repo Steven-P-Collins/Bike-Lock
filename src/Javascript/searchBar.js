@@ -128,7 +128,7 @@ function initAutocomplete() {
         let marker = new google.maps.Marker({
             position: {lat: parseFloat(rack[1]), lng: parseFloat(rack[2])},
             map: map,
-            icon: icons.numbers,
+            // icon: icons.numbers,
             title: rack[0]
         });
 
