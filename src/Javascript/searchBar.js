@@ -122,10 +122,8 @@ function initAutocomplete() {
     //Bug prevents us from using any map movement with other animations
 
     console.log('avail locks: '+availableLocks[1][0][1]);
-    console.log('racks: ' + rackLocation);
+    console.log('all locks: ' + availableLocks);
     rackLocation.forEach(rack => {
-
-        console.log(availableLocks[rack[3]]);
 
         icons.numbers.url += availableLocks[rack[3]][0] + '.png';
         let marker = new google.maps.Marker({
