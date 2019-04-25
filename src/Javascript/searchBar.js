@@ -124,14 +124,14 @@ function initAutocomplete() {
     console.log('avail locks: '+availableLocks);
     console.log('racks: ' + rackLocation);
     rackLocation.forEach(rack => {
-        console.log('avail locks inner: '+availableLocks.rack[3]);
+        // console.log('avail locks inner: '+availableLocks.rack[3]);
 
 
-        // icons.numbers.url += availableLocks[rack[3]][0] + '.png';
+        icons.numbers.url += availableLocks[rack[3]][0] + '.png';
         let marker = new google.maps.Marker({
             position: {lat: parseFloat(rack[1]), lng: parseFloat(rack[2])},
             map: map,
-            // icon: icons.numbers,
+            icon: icons.numbers,
             title: rack[0]
         });
 
