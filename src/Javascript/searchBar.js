@@ -41,12 +41,12 @@ const stylesArray = [
 var rackLocation;
 //Grab rack locations for variable rackLocation
 getRacks();
-// = [
-//     ['Tremont Athletic East', 41.508821, -81.602177, 'A'],
-//     ['Washkewicz School of Engineering', 41.503503, -81.673287, 'B'],
-//     ['Climb Cleveland', 41.482013, -81.687308, 'C'],
-//     ['Sherwin Williams HQ', 41.496804, -81.692058, 'D']
-// ];
+var test = [
+    ['Tremont Athletic East', 41.508821, -81.602177, 'A'],
+    ['Washkewicz School of Engineering', 41.503503, -81.673287, 'B'],
+    ['Climb Cleveland', 41.482013, -81.687308, 'C'],
+    ['Sherwin Williams HQ', 41.496804, -81.692058, 'D']
+];
 
 var userPos = { lat: 41.499321, lng: -81.694359 };
 
@@ -121,7 +121,7 @@ function initAutocomplete() {
     });
     //Bug prevents us from using any map movement with other animations
 
-    alert(rackLocation.length);
+    alert(test.length);
 
     rackLocation.forEach(rack => {
         icons.numbers.url += availableLocks[rack[3]][0] + '.png';
