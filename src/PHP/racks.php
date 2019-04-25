@@ -21,10 +21,10 @@ if (!$result) {
 
 $x = 0;
 while ($row = @mysqli_fetch_assoc($result)) {
-    $racks[$x][] = $row['name'];
-    $racks[$x][] = $row['lat'];
-    $racks[$x][] = $row['lng'];
-    $racks[$x][] = $row['rackID'];
+    $racks[$x] = $row['name'];
+    $racks[$x] = $row['lat'];
+    $racks[$x] = $row['lng'];
+    $racks[$x] = $row['rackID'];
 
     $x++;
 }
