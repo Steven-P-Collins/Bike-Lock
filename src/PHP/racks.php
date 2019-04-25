@@ -29,9 +29,11 @@ while ($row = @mysqli_fetch_assoc($result)) {
     $x++;
 }
 
-$racks = json_encode($racks);
-// TODO, echo data to searchBar.js
-echo $racks;
+echo json_encode($racks);
+
+//$racks = json_encode($racks);
+//// TODO, echo data to searchBar.js
+//echo $racks;
 
 //$filename = 'markers.json';
 //if(file_put_contents($filename, $data)) {
