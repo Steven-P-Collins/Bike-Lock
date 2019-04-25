@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementsByClassName("lock")[0].onclick = lock;
     // document.getElementsByClassName('nearest_Lock')[0] = nearestLock;
     console.log(rackLocation);
+    console.log(availableLocks);
 });
 
 //For now the out put is just to the console. if you call the function it will do what you expect.
@@ -208,7 +209,7 @@ function getLocks() {
     xmlhttpGET.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             console.log(this.responseText);
-            availableLocks = this.responseText;
+            availableLocks = "<?php echo $locks?>";
         }
     };
 

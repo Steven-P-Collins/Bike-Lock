@@ -10,7 +10,7 @@ if (!$connection) {
     die('Not connected :' . $connection->connect_error);
 }
 
-$data = array(
+$racks = array(
     array()
 );
 $query = "SELECT * FROM Rack";
@@ -21,17 +21,17 @@ if (!$result) {
 
 $x = 0;
 while ($row = @mysqli_fetch_assoc($result)) {
-    $data[$x][] = $row['name'];
-    $data[$x][] = $row['lat'];
-    $data[$x][] = $row['lng'];
-    $data[$x][] = $row['rackID'];
+    $racks[$x][] = $row['name'];
+    $racks[$x][] = $row['lat'];
+    $racks[$x][] = $row['lng'];
+    $racks[$x][] = $row['rackID'];
 
     $x++;
 }
 
-$data = json_encode($data);
+$racks = json_encode($racks);
 // TODO, echo data to searchBar.js
-echo $data;
+echo $racks;
 
 //$filename = 'markers.json';
 //if(file_put_contents($filename, $data)) {

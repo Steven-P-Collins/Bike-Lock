@@ -10,7 +10,7 @@ if (!$connection) {
     die('Not connected :' . $connection->connect_error);
 }
 
-$data = array(
+$locks = array(
     array()
 );
 $names = "SELECT rack FROM LockDevice";
@@ -22,15 +22,15 @@ if (!$result) {
 
 $x = 0;
 while ($id = @mysqli_fetch_assoc($result)) {
-    if ($x != 0 && $data[$x-1][0] == "'" . $id['rack'] . "': ") {
+    if ($x != 0 && $locks[$x-1][0] == "'" . $id['rack'] . "': ") {
         continue;
     }
-    $data[$x][0] = "'" . $id['rack'] . "': ";
+    $locks[$x][0] = "'" . $id['rack'] . "': ";
 
     $x++;
 }
 
-$len = count($data);
+$len = count($locks);
 $query = "";
 for ($r = 1; $r <= $len; $r++) {
     $query .= "SELECT COUNT(*) as 'num' FROM LockDevice WHERE rack=" . $r . " AND inUse=0;";
@@ -53,13 +53,13 @@ if (mysqli_multi_query($connection,$query)) {
             while($row = mysqli_fetch_row($result)) {
                 switch ($j) {
                     case 1:
-                        $data[$i][0] .= "[" . $row[0] . ", ";
+                        $locks[$i][0] .= "[" . $row[0] . ", ";
                         break;
                     case 3:
-                        $data[$i][0] .= $row[0] . "]";
+                        $locks[$i][0] .= $row[0] . "]";
                         break;
                     default:
-                        $data[$i][0] .=  $row[0] . ", ";
+                        $locks[$i][0] .=  $row[0] . ", ";
                 }
             }
             mysqli_free_result($result);
@@ -73,9 +73,9 @@ if (mysqli_multi_query($connection,$query)) {
     while (mysqli_more_results($connection));
 }
 
-$data = json_encode($data);
+$locks = json_encode($locks);
 // TODO, echo data to webBLE.js
-echo $data;
+echo $locks;
 
 //$filename = 'locks.json';
 //if(file_put_contents($filename, $data)) {
