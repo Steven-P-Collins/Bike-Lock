@@ -184,7 +184,7 @@ function getRacks() {
 
     xmlhttpGET.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-            rackLocation = this.responseText;
+            rackLocation = JSON.parse(this.responseText);
         }
     };
 
