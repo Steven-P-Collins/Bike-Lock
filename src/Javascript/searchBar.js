@@ -50,10 +50,6 @@ var userPos = { lat: 41.499321, lng: -81.694359 };
 
 
 function initAutocomplete() {
-    //Grab lock locations for webBLE variable availableLocks
-    getLocks();
-    //Grab rack locations for variable rackLocation
-    getRacks();
 
     //Needs to be inside this function
     const markerSize = new google.maps.Size(50, 50);
