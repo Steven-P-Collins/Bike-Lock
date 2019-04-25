@@ -180,8 +180,7 @@ function getRacks() {
 
     xmlhttpGET.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-            console.log(this.responseText);
-            rackLocation = "<?php echo $racks ?>";
+            console.log(document.getElementById('myPhpValue').value);
         }
     };
 
