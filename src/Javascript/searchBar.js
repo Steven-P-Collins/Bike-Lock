@@ -121,10 +121,8 @@ function initAutocomplete() {
     });
     //Bug prevents us from using any map movement with other animations
 
-    console.log('Racks: ' + rackLocation);
-    console.log('Locks: ' + availableLocks);
-
     rackLocation.forEach(rack => {
+        console.log(rack);
         icons.numbers.url += availableLocks[rack[3]][0] + '.png';
         let marker = new google.maps.Marker({
             position: {lat: rack[1], lng: rack[2]},
