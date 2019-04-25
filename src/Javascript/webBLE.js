@@ -21,6 +21,10 @@ var availableLocks;
 // };
 
 document.addEventListener('DOMContentLoaded', () => {
+    //Grab lock locations for webBLE variable availableLocks
+    getLocks();
+    //Grab rack locations for variable rackLocation
+    getRacks();
     document.getElementsByClassName("connect")[0].onclick = connect;
     document.getElementsByClassName("disconnect")[0].onclick = disconnect;
     document.getElementsByClassName("lock")[0].onclick = lock;
