@@ -41,12 +41,12 @@ const stylesArray = [
 var rackLocation;
 //Grab rack locations for variable rackLocation
 getRacks();
-// var test = [
-//     ['Tremont Athletic East', 41.508821, -81.602177, '3'],
-//     ['Washkewicz School of Engineering', 41.503503, -81.673287, '2'],
-//     ['Climb Cleveland', 41.482013, -81.687308, '4'],
-//     ['Sherwin Williams HQ', 41.496804, -81.692058, '1']
-// ];
+var test = [
+    ['Tremont Athletic East', 41.508821, -81.602177, '3'],
+    ['Washkewicz School of Engineering', 41.503503, -81.673287, '2'],
+    ['Climb Cleveland', 41.482013, -81.687308, '4'],
+    ['Sherwin Williams HQ', 41.496804, -81.692058, '1']
+];
 
 var userPos = { lat: 41.499321, lng: -81.694359 };
 
@@ -121,12 +121,12 @@ function initAutocomplete() {
     });
     //Bug prevents us from using any map movement with other animations
 
-    // console.log('avail locks: '+availableLocks[0][0][6]);
-    // console.log('all locks: ' + availableLocks[1][0][6]);
+    alert(availableLocks);
     rackLocation.forEach(rack => {
+        alert('rack #: '+rack[3]);
+        alert('Avail lock #: '+availableLocks[rack[3][0]]);
 
-        // console.log('rack #: '+ rack[3]);
-        // icons.numbers.url += availableLocks[rack[3]][0][6] + '.png';
+        icons.numbers.url += availableLocks[rack[3]][0] + '.png';
         let marker = new google.maps.Marker({
             position: {lat: parseFloat(rack[1]), lng: parseFloat(rack[2])},
             map: map,
