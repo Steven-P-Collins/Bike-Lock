@@ -122,7 +122,7 @@ lockingDisplay = function () {
     else {
         locking.innerHTML = 'Locking';
     }
-    locking.style.display = 'none';
+    // locking.style.display = 'none';
 };
 
 //Recursive function to type out ... for locking
