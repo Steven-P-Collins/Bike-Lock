@@ -13,9 +13,32 @@ const stylesArray = [
         ]
     },
     {
+        featureType: "road.highway",
+        elementType: "geometry.fill",
+        stylers: [
+            {visibility: "simplified"},
+            {weight: 3}
+        ]
+    },
+    {
+        featureType: "road.highway",
+        elementType: "geometry.stroke",
+        stylers: [
+            {visibility: "simplified"},
+            {color: '#ffffff'}
+        ]
+    },
+    {
         featureType: 'road',
         stylers: [
             {visibility: 'simplified'}
+        ]
+    },
+    {
+        featureType: 'road.highway',
+        elementType: 'labels.icon',
+        stylers: [
+            {visibility: 'off'}
         ]
     },
     {
@@ -34,6 +57,13 @@ const stylesArray = [
         featureType: 'poi.park',
         stylers: [
             {visibility: 'on'}
+        ]
+    },
+    {
+        featureType: 'poi.park',
+        elementType: 'labels.icon',
+        stylers: [
+            {visibility: 'off'}
         ]
     }
 ];
