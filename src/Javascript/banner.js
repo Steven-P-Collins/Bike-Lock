@@ -76,7 +76,7 @@ buttonDisplay = function (choice) {
     }
     else {
         lockingDisplay(locking);
-        locking.innerHTML = 'unLocking';
+        // locking.innerHTML = 'unLocking';
         lockButton.style.display = 'none';
         connectButton.display = 'none';
         disconnectButton.display = 'none';
@@ -115,7 +115,7 @@ toggleBounce = function (prevMarker, marker) {
 lockingDisplay = function (locking) {
     if (locking === null) {
         console.log('unlock change');
-        let unlock = document.getElementsByClassName('banner_Locking')[0].innerHTML = 'Locking';
+        document.getElementsByClassName('banner_Locking')[0].innerHTML = 'Unlocking';
         // unlock.style.display = 'block';
         // typeWriter(unlock, null);
         // unlock.innerHTML = 'Locking';
