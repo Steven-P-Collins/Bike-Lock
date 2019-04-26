@@ -138,7 +138,6 @@ function onChanged(event) {
     console.log("lock response: " + out);
     newP();
     lockButtonText.innerHTML = lockButtonText.innerHTML === 'Lock' ? 'Unlock' : 'Lock';
-    lockingDisplay(null);
 }
 
 //this function will move the stepper motor
@@ -178,8 +177,6 @@ function storePass() {
 
     xmlhttpPOST.open("POST", "src/PHP/postPIN.php?id="+lockID+"&p="+pass, true);
     xmlhttpPOST.send();
-    lockingDisplay(null);
-
 }
 
 function getPass() {

@@ -1,4 +1,6 @@
 //Turns banner on and off for displaying buttons to lock and such
+let locking = document.getElementsByClassName('banner_Locking')[0];
+
 
 banner = function (location) {
     let banner = document.getElementsByClassName('banner')[0];
@@ -39,7 +41,6 @@ buttonDisplay = function (choice) {
     let lockButton = document.getElementsByClassName('lock')[0];
     let tutorial = document.getElementsByClassName('tutorial')[0].style;
     let noLocks = document.getElementsByClassName('no_locks')[0].style;
-    let locking = document.getElementsByClassName('banner_Locking')[0];
 
     if (choice === 0) {
         locking.style.display = 'none';
@@ -75,7 +76,7 @@ buttonDisplay = function (choice) {
         noLocks.display = 'none';
     }
     else {
-        lockingDisplay(locking);
+        lockingDisplay();
         lockButton.style.display = 'none';
         connectButton.display = 'none';
         disconnectButton.display = 'none';
@@ -111,28 +112,20 @@ toggleBounce = function (prevMarker, marker) {
 // };
 
 //Displays locking load ... when locking
-lockingDisplay = function (locking) {
-    if (locking === null) {
-        let test = document.getElementsByClassName('banner_Locking')[0];
-        test.innerHTML = 'Unlocking';
-        console.log(test);
-        // unlock.style.display = 'block';
-        // typeWriter(unlock, null);
-        // unlock.innerHTML = 'Locking';
-        // unlock.style.display = 'none';
+lockingDisplay = function () {
+
+    locking.style.display = 'block';
+    typeWriter(locking, null);
+    if (locking.innerHTML === 'Locking') {
+        locking.innerHTML = 'Unlocking';
     }
     else {
         locking.innerHTML = 'Locking';
-        locking.style.display = 'block';
-        typeWriter(locking, null);
     }
-
-    // locking === null ? document.getElementsByClassName('banner_Locking')[0].innerHTML = 'Locking' :
-    //     (locking.style.display = 'block', typeWriter(locking, null));
 };
 
 //Recursive function to type out ... for locking
-function typeWriter(locking, i) {
+function typeWriter(i) {
     i = i === null ? 0 : i;
 
     if (i !== 7) {
