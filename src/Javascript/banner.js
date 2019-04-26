@@ -25,7 +25,7 @@ lockMarker = function  (banner, title) {
         buttonDisplay(0);
     }
     else if (!bleDevice || !bleDevice.gatt.connected) {
-        buttonDisplay(2);
+        buttonDisplay(1);
     }
     else if (bleDevice.gatt.connected) {
         buttonDisplay(2);
