@@ -173,7 +173,7 @@ function storePass() {
             console.log(this.responseText);
         }
     };
-    console.log(pass);
+    console.log(parseInt(pass));
 
     xmlhttpPOST.open("POST", "src/PHP/postPIN.php?id="+lockID+"&p="+pass, true);
     xmlhttpPOST.send();
@@ -201,7 +201,7 @@ function getLocks() {
 
     xmlhttpGET.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-            availableLocks = JSON.parse(this.responseText);
+            availableLocks = JSON.parse(this.responseText, 16);
         }
     };
 
