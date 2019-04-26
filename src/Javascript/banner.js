@@ -118,6 +118,7 @@ lockingDisplay = function (locking) {
         unlock.style.display = 'block';
         typeWriter(unlock, null);
         unlock.innerHTML = 'Locking';
+        unlock.style.display = 'none';
     }
     else {
         locking.style.display = 'block';
