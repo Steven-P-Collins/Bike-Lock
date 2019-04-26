@@ -123,7 +123,7 @@ function typeWriter(i) {
 
     if (i < 3) {
         locking.innerHTML += '.';
-        i++;
+        i += 1;
         setTimeout(typeWriter, 500, locking, i);
     }
 }
