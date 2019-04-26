@@ -15,7 +15,7 @@ const stylesArray = [
     {
         featureType: 'road',
         stylers: [
-            {visibility: 'on'}
+            {visibility: 'simplified'}
         ]
     },
     {
@@ -41,12 +41,6 @@ const stylesArray = [
 var rackLocation;
 //Grab rack locations for variable rackLocation
 getRacks();
-var test = [
-    ['Tremont Athletic East', 41.508821, -81.602177, '3'],
-    ['Washkewicz School of Engineering', 41.503503, -81.673287, '2'],
-    ['Climb Cleveland', 41.482013, -81.687308, '4'],
-    ['Sherwin Williams HQ', 41.496804, -81.692058, '1']
-];
 
 var userPos = { lat: 41.499321, lng: -81.694359 };
 
@@ -71,11 +65,15 @@ function initAutocomplete() {
         }
     };
 
-    const map = new google.maps.Map(document.getElementById('map'), {
+    var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 16,
         mapTypeId: 'roadmap',
         disableDefaultUI: 'true'
     });
+
+    var bikeLayer = new google.maps.BicyclingLayer();
+    bikeLayer.setMap(map);
+    map.setOptions({styles: stylesArray});
 
     const currentLocation = new google.maps.Marker({
         map: map,
@@ -84,10 +82,6 @@ function initAutocomplete() {
     });
 
     let prevMarker = currentLocation;
-
-    const bikeLayer = new google.maps.BicyclingLayer();
-    bikeLayer.setMap(map);
-    map.setOptions({styles: stylesArray});
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -118,9 +112,7 @@ function initAutocomplete() {
     //Bug prevents us from using any map movement with other animations
 
     rackLocation.forEach(rack => {
-        // alert('rack #: '+rack[3]);
         let lockCode = rack[3]-1;
-        // alert('Avail lock #: '+availableLocks[lockCode][0][6]);
 
         icons.numbers.url += availableLocks[lockCode][0][6] + '.png';
         let marker = new google.maps.Marker({
