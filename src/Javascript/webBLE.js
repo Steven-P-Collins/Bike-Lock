@@ -165,7 +165,7 @@ function newP() {
 }
 
 function storePass() {
-    xmlhttpGET = window.XMLHttpRequest ? new XMLHttpRequest()
+    xmlhttpPOST = window.XMLHttpRequest ? new XMLHttpRequest()
         : new ActiveXObject("Microsoft.XMLHTTP");
 
     xmlhttpPOST.onreadystatechange = function () {
