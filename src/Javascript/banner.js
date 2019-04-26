@@ -76,7 +76,6 @@ buttonDisplay = function (choice) {
     }
     else {
         lockingDisplay(locking);
-        // locking.innerHTML = 'unLocking';
         lockButton.style.display = 'none';
         connectButton.display = 'none';
         disconnectButton.display = 'none';

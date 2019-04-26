@@ -145,7 +145,7 @@ function onChanged(event) {
 function lock() {
     //Hides buttons so users cannot disconnect while state changing
     buttonDisplay(4);
-    document.getElementsByClassName('banner_Locking')[0].innerHTML = 'Locking';
+    document.getElementsByClassName('banner_Locking')[0].innerHTML = 'Unlocking';
 	lockChar.writeValue(pass)
         .then(_ => {
             console.log('Lock characteristic changed to: ' + pass);
