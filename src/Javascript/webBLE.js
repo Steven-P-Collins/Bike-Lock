@@ -138,6 +138,7 @@ function onChanged(event) {
     console.log("lock response: " + out);
     newP();
     lockButtonText.innerHTML = lockButtonText.innerHTML === 'Lock' ? 'Unlock' : 'Lock';
+    lockingDisplay(null);
 }
 
 //this function will move the stepper motor
@@ -160,7 +161,7 @@ function newP() {
 	console.log(pass);
 	//Allows buttons to reappear after state change completed
     buttonDisplay(2);
-    lockingDisplay(null);
+
     storePass();
 }
 
