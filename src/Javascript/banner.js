@@ -81,6 +81,7 @@ buttonDisplay = function (choice) {
         disconnectButton.display = 'none';
         tutorial.display = 'none';
         noLocks.display = 'none';
+        lockingDisplay(null);
     }
 };
 
