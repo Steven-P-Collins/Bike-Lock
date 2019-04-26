@@ -10,6 +10,7 @@ var lockID = 'Bike Lock';
 /*
     Available Locks holds the key followed by
     [Free locks, Locks in use, Total Locks]
+    update
  */
 
 var availableLocks;
