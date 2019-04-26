@@ -184,7 +184,7 @@ function getPass() {
 
     xmlhttpGET.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-            pass = this.responseText;
+            pass = [Uint16Array(this.responseText)];
         }
     };
 
