@@ -4,7 +4,7 @@ var bleService;
 var battChar;
 var lockChar;
 var lockNotChar;
-var pass = new Uint16Array([0x1111]);
+var pass = new Uint16Array([0x1110]);
 var lockID = 'Bike Lock';
 
 /*
