@@ -185,6 +185,7 @@ function getPass() {
     xmlhttpGET.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             pass = parseInt(this.responseText);
+            console.log(pass);
         }
     };
 
