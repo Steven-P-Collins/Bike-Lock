@@ -115,7 +115,7 @@ toggleBounce = function (prevMarker, marker) {
 lockingDisplay = function (locking) {
     if (locking === null) {
         let test = document.getElementsByClassName('banner_Locking')[0];
-        test.innerHTML = 'Unlocking';
+        test.innerHTML = 'Locking';
         console.log(test);
         // unlock.style.display = 'block';
         // typeWriter(unlock, null);
