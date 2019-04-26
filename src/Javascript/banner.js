@@ -112,22 +112,30 @@ toggleBounce = function (prevMarker, marker) {
 
 //Displays locking load ... when locking
 lockingDisplay = function (locking) {
-    locking === null ? document.getElementsByClassName('banner_Locking')[0].innerHTML = 'Locking' :
-        (locking.style.display = 'block', typeWriter(locking, null));
+    if (locking === null) {
+        let unlock = document.getElementsByClassName('banner_Locking')[0];
+        unlock.innerHTML = 'Unlocking';
+        unlock.style.display = 'block';
+        typeWriter(unlock, null);
+        unlock.innerHTML = 'Locking';
+    }
+    else {
+        locking.style.display = 'block';
+        typeWriter(locking, null);
+        // locking.innerHTML = 'Locking';
+    }
+
+    // locking === null ? document.getElementsByClassName('banner_Locking')[0].innerHTML = 'Locking' :
+    //     (locking.style.display = 'block', typeWriter(locking, null));
 };
 
 //Recursive function to type out ... for locking
 function typeWriter(locking, i) {
     i = i === null ? 0 : i;
 
-    if (i !== 3 && i !== 7) {
+    if (i !== 7) {
         locking.innerHTML += '.';
         i++;
         setTimeout(typeWriter, 500, locking, i);
-    }
-    else if (i === 3) {
-        locking.innerHTML = 'Locking';
-        i++;
-        setTimeout(typeWriter, 500, locking, i)
     }
 }
