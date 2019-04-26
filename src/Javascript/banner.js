@@ -123,7 +123,7 @@ lockingDisplay = function (locking) {
     else {
         locking.style.display = 'block';
         typeWriter(locking, null);
-        locking.innerHTML = 'Locking';
+        //locking.innerHTML = 'Locking';
     }
 
     // locking === null ? document.getElementsByClassName('banner_Locking')[0].innerHTML = 'Locking' :
