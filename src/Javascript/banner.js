@@ -121,7 +121,7 @@ lockingDisplay = function () {
 //Recursive function to type out ... for locking
 function typeWriter(i) {
 
-    if (i !== 3) {
+    if (i < 3) {
         locking.innerHTML += '.';
         i++;
         setTimeout(typeWriter, 500, locking, i);
