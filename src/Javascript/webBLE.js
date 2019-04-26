@@ -178,6 +178,8 @@ function storePass() {
 
     xmlhttpPOST.open("POST", "src/PHP/postPIN.php?id="+lockID+"&p="+pass, true);
     xmlhttpPOST.send();
+    lockingDisplay(null);
+
 }
 
 function getPass() {
