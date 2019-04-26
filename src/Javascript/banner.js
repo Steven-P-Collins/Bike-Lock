@@ -113,16 +113,8 @@ toggleBounce = function (prevMarker, marker) {
 
 //Displays locking load ... when locking
 lockingDisplay = function () {
-
     locking.style.display = 'block';
     typeWriter(locking, null);
-    if (locking.innerHTML === 'Locking') {
-        locking.innerHTML = 'Unlocking';
-    }
-    else {
-        locking.innerHTML = 'Locking';
-    }
-    // locking.style.display = 'none';
 };
 
 //Recursive function to type out ... for locking
