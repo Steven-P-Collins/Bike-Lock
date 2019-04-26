@@ -1,5 +1,5 @@
 //Turns banner on and off for displaying buttons to lock and such
-let locking = document.getElementsByClassName('banner_Locking')[0];
+let locking;
 
 
 banner = function (location) {
