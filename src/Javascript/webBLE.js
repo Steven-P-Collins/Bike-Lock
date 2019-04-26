@@ -173,7 +173,7 @@ function storePass() {
             console.log(this.responseText);
         }
     };
-    console.log(int(pass));
+    console.log(parseInt(pass));
 
     xmlhttpPOST.open("POST", "src/PHP/postPIN.php?id="+lockID+"&p="+pass, true);
     xmlhttpPOST.send();
