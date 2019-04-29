@@ -72,7 +72,7 @@ buttonDisplay = function (choice) {
         lockButton.style.display = 'none';
         connectButton.display = 'none';
         disconnectButton.display = 'none';
-        tutorial.display = 'block';
+        tutorial.display = 'none'; //Should be block
         noLocks.display = 'none';
     }
     else {
