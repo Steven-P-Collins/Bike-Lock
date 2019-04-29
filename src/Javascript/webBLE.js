@@ -141,7 +141,7 @@ function onChanged(event) {
 
     let out = value.getUint8(0);
 
-    if (lockState == 0) {
+    if (lockState === 0) {
 	lockState = 1;
     }
     else {
@@ -225,15 +225,15 @@ function storeState() {
     xmlhttpPOST = window.XMLHttpRequest ? new XMLHttpRequest()
 	: new ActiveXObjective("Microsoft.XMLHTTP");
 
-    xmlhttpPost.onreadystatechange = function () {
+    xmlhttpPOST.onreadystatechange = function () {
 	if (this.readyState === 4 && this.status === 200) {
 	    console.log(this.responseText);
 	}
     };
     console.log(lockState);
 
-    xmlhttpPost.open("POST", "src/PHP/postState.php?id="+lockID+"&p="+lockState, true);
-    xmlhttpPost.send();
+    xmlhttpPOST.open("POST", "src/PHP/postState.php?id="+lockID+"&p="+lockState, true);
+    xmlhttpPOST.send();
 }
 
 function getState() {
