@@ -4,8 +4,9 @@ var bleService;
 var battChar;
 var lockChar;
 var lockNotChar;
-var pass = new Uint16Array([0x1110]);
+var pass = new Uint16Array([0x1111]);
 var lockID = 'Bike Lock';
+var lockState = 0;
 
 /*
     Available Locks holds the key followed by
@@ -51,6 +52,7 @@ function connect() {
             bleDevice = device;
             console.log('Connecting to GATT Server...');
             getPass();
+	    getState();
             return device.gatt.connect();
         })
         .then(server => {
@@ -106,8 +108,9 @@ function disconnect() {
         bleDevice.gatt.disconnect();
         console.log('Bluetooth Device connected: ' + bleDevice.gatt.connected);
         buttonDisplay(1);
-        pass[0] = 0x1111;
-        storePass();
+        //pass[0] = 0x1111;
+        //storePass();
+	storeState();
     }
 }
 //Battery voltage reading. Should be called after connecting
@@ -131,7 +134,6 @@ function getBatt() {
     });
 }
 
-
 //Should not have to be called from anywhere but here
 function onChanged(event) {
     let value = event.target.value;
@@ -139,6 +141,12 @@ function onChanged(event) {
 
     let out = value.getUint8(0);
 
+    if (lockState == 0) {
+	lockState = 1;
+    }
+    else {
+	lockState = 0;
+    }
     console.log("lock response: " + out);
     newP();
     lockButtonText.innerHTML = lockButtonText.innerHTML === 'Lock' ? 'Unlock' : 'Lock';
@@ -164,8 +172,8 @@ function newP() {
 	console.log(pass);
 	//Allows buttons to reappear after state change completed
     buttonDisplay(2);
-
     storePass();
+    storeState();
 }
 
 function storePass() {
@@ -211,5 +219,34 @@ function getLocks() {
 
     xmlhttpGET.open("GET", "src/PHP/locks.php?", true);
     xmlhttpGET.send();
+}
 
+function storeState() {
+    xmlhttpPOST = window.XMLHttpRequest ? new XMLHttpRequest()
+	: new ActiveXObjective("Microsoft.XMLHTTP");
+
+    xmlhttpPost.onreadystatechange = function () {
+	if (this.readyState === 4 && this.status === 200) {
+	    console.log(this.responseText);
+	}
+    };
+    console.log(lockState);
+
+    xmlhttpPost.open("POST", "src/PHP/postState.php?id="+lockID+"&p="+lockState, true);
+    xmlhttpPost.send();
+}
+
+function getState() {
+    xmlhttpGET = window.XMLHttpRequest ? new XMLHttpRequest()
+        : new ActiveXObject("Microsoft.XMLHTTP");
+
+    xmlhttpGET.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            pass[0] = parseInt(this.responseText, 16);
+            console.log(pass);
+        }
+    };
+
+    xmlhttpGET.open("GET", "src/PHP/getState.php?id="+lockID, true);
+    xmlhttpGET.send();
 }
