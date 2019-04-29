@@ -105,6 +105,8 @@ function disconnect() {
         bleDevice.gatt.disconnect();
         console.log('Bluetooth Device connected: ' + bleDevice.gatt.connected);
         buttonDisplay(1);
+        pass[0] = 0x1111;
+        storePass();
     }
 }
 //Battery voltage reading. Should be called after connecting
