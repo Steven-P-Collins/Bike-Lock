@@ -159,7 +159,7 @@ function initAutocomplete() {
             setTimeout(toggleBounce, 500, prevMarker, marker);
             prevMarker = marker;
         });
-        icons.numbers.url = markerURL;
+        // icons.numbers.url = markerURL;
     });
 
     // Create the search box and link it to the UI element.
