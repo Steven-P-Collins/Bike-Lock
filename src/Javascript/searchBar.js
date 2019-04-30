@@ -154,7 +154,7 @@ function initAutocomplete() {
 
         //Passes the specific rack to display necessary data, location, num locks
         marker.addListener('click', () => {
-            banner(rack);
+            // banner(rack);
             map.panTo(marker.position);
             setTimeout(toggleBounce, 500, prevMarker, marker);
             prevMarker = marker;
