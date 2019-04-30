@@ -20,10 +20,10 @@ getLocks();
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementsByClassName("connect")[0].onclick = connect;
-    document.getElementsByClassName("disconnect")[0].onclick = disconnect;
-    document.getElementsByClassName("lock")[0].onclick = lock;
-    locking = document.getElementsByClassName('banner_Locking')[0];
+    // document.getElementsByClassName("connect")[0].onclick = connect;
+    // document.getElementsByClassName("disconnect")[0].onclick = disconnect;
+    // document.getElementsByClassName("lock")[0].onclick = lock;
+    // locking = document.getElementsByClassName('banner_Locking')[0];
     // document.getElementsByClassName('nearest_Lock')[0] = nearestLock;
 });
 
