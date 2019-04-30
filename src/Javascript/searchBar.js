@@ -79,7 +79,7 @@ function initAutocomplete() {
 
     //Needs to be inside this function
     const markerSize = new google.maps.Size(50, 50);
-    const markerURL = 'src/Images/number_';
+    const markerURL = 'src/Images/number_1.png';
     var icons = {
         user: {
             url: 'src/Images/cycling.png',
@@ -144,7 +144,7 @@ function initAutocomplete() {
     rackLocation.forEach(rack => {
         let lockCode = rack[3]-1;
 
-        icons.numbers.url += availableLocks[lockCode][0][6] + '.png';
+        // icons.numbers.url += availableLocks[lockCode][0][6] + '.png';
         let marker = new google.maps.Marker({
             position: {lat: parseFloat(rack[1]), lng: parseFloat(rack[2])},
             map: map,
