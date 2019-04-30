@@ -134,7 +134,7 @@ function initAutocomplete() {
 
     //Puts user marker on map
     currentLocation.addListener('click', () => {
-        banner([currentLocation.title, null]);
+        // banner([currentLocation.title, null]);
         map.panTo(currentLocation.position);
         setTimeout(toggleBounce, 500, prevMarker, currentLocation);
         prevMarker = currentLocation;
