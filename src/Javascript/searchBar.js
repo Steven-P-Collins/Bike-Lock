@@ -208,7 +208,7 @@ function getRacks() {
         }
     };
 
-    xmlhttpGET.open("GET", "src/PHP/racks.php?", true);
+    xmlhttpGET.open("GET", "src/PHP/CLERacks.php?", true);
     xmlhttpGET.send();
 
 }
