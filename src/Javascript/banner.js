@@ -36,11 +36,11 @@ lockMarker = function  (banner, title) {
 
 //Allows us to set styling based on a numerical choice of 0, 1, or 2
 buttonDisplay = function (choice) {
-    // let connectButton = document.getElementsByClassName('connect')[0].style;
-    // let disconnectButton = document.getElementsByClassName('disconnect')[0].style;
-    // let lockButton = document.getElementsByClassName('lock')[0];
-    // let tutorial = document.getElementsByClassName('tutorial')[0].style;
-    // let noLocks = document.getElementsByClassName('no_locks')[0].style;
+    let connectButton = document.getElementsByClassName('connect')[0].style;
+    let disconnectButton = document.getElementsByClassName('disconnect')[0].style;
+    let lockButton = document.getElementsByClassName('lock')[0];
+    let tutorial = document.getElementsByClassName('tutorial')[0].style;
+    let noLocks = document.getElementsByClassName('no_locks')[0].style;
 
     if (choice === 0) {
         locking.style.display = 'none';
